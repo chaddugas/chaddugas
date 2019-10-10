@@ -42,6 +42,8 @@ collections:
   - name: "main-banner"
     label: "Main Banner"
     folder: "static/data/main-banner"
+    delete: false
+    preview_path: /
     fields:
       - {label: "Super Text", name: "super", widget: "string"}
       - {label: "Main Text", name: "main", widget: "string"}
