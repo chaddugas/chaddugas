@@ -2,17 +2,37 @@ backend:
   name: git-gateway
   branch: master
 
+site_url: https://chaddugas.me
+display_url: https://chaddugas.me
+logo_url: https://chaddugas.tech/image-library/logo-empty.svg
+
+show_preview_links: true
+
 media_folder: "static/media"
 public_folder: "/media"
 
+slug:
+  encoding: "ascii"
+  clean_accents: true
+
 collections:
-  - name: "posts"
-    label: "Posts"
-    folder: "posts"
+  - name: "nav"
+    label: "Navigation"
+    folder: "navigation"
     create: true
     slug: "{{slug}}"
+    extension: json
+    format: json
+    editor:
+      preview: false
     fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Excerpt", name: "excerpt", widget: "string"}
-      - {label: "Publish Date", name: "date", widget: "date"}
-      - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "Title", name: "title", widget: "string", pattern: [".{4,}", "Must have at least 4 characters"]}
+      - {label: "Link", name: "link", widget: "string"}
+      - label: "Sub Navigation"
+        name: "subs"
+        widget: "list"
+        required: false
+        allow_add: true
+        fields:
+          - {label: "Title", name: "title", widget: "string", pattern: [".{4,}", "Must have at least 4 characters"]}
+          - {label: "Link", name: "link", widget: "string"}
