@@ -2,6 +2,7 @@
 	div
 		app-header
 		main(:style="{marginBottom: offset_footer}")
+			slot
 			br
 			br
 			br

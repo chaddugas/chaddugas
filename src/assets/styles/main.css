@@ -5891,7 +5891,6 @@ screen and (max-height: 300px) {
 	-webkit-transition: background-position-x;
 	-o-transition: background-position-x;
 	transition: background-position-x;
-	background-image: url('../images/aspens.jpg');
 	-webkit-box-shadow: inset 0 -8px 8px -8px rgba(0, 0, 0, 0.5);
 	box-shadow: inset 0 -8px 8px -8px rgba(0, 0, 0, 0.5);
 	-webkit-box-align: end;
