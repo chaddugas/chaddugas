@@ -9,25 +9,26 @@
 					ul
 						li(
 							v-for="item in $static.nav.edges",
-							:class="{'has-children': item.node.subs}")
+							:class="{'has-children': item.node.subs.length}")
 							a(:href='item.node.link') {{ item.node.title }}
 								span
-							ul(v-if="item.node.subs")
-								li(v-for="sub in item.subs")
-									a(href='sub.link' target='_blank')
+							ul(v-if="item.node.subs.length")
+								li(v-for="sub in item.node.subs")
+									a(:href="sub.link" target='_blank')
 										i(:class="sub.icon")
 				.headerMain-mobileToggle.icon-menu
 </template>
 
 <static-query>
 query Nav {
-	nav: allMainNav {
+	nav: allMainNav(sortBy: "order") {
 		edges {
 			node {
 				title
 				link
 				subs {
 					link
+					icon
 				}
 			}
 		}

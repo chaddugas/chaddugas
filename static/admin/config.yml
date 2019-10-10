@@ -8,6 +8,7 @@ backend:
 
 site_url: https://www.chaddugas.me
 display_url: https://www.chaddugas.me
+# logo_url: https://your-site.com/images/logo.svg
 
 show_preview_links: true
 
@@ -28,6 +29,7 @@ collections:
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Link", name: "link", widget: "string"}
+      - {label: "Order", name: "order", widget: "number"}
       - label: "Sub Navigation"
         name: "subs"
         widget: "list"
