@@ -1,6 +1,7 @@
 ---
-super: Banner
-main: Banner
-sub: Banner
+super: front-end dev | ux | u
+main: chad dugas
+sub: colorado native
+image: /media/aspens.jpg
 ---
 
