@@ -1,18 +1,23 @@
 ---
 title: Contact
 link: '#contact'
+order: 4
 subs:
-  - title: Linkedin
+  - icon: icon-linkedin
+    title: Linkedin
     link: //
-    icon: icon-linkedin
-  - title: Github
+    order: 1
+  - icon: icon-github
+    title: Github
     link: //
-    icon: icon-github
-  - title: Twitter
+    order: 2
+  - icon: icon-twitter
+    title: Twitter
     link: //
-    icon: icon-twitter
-  - title: Instagram
+    order: 3
+  - icon: icon-instagram
+    title: Instagram
     link: //
-    icon: icon-instagram
+    order: 4
 ---
 
