@@ -1,12 +1,13 @@
 backend:
-  name: git-gateway
-  branch: master
-  accept_roles:
-    - admin
-    - editor
+  name: github
+  repo: chaddugas/me
+  # name: git-gateway
+  # accept_roles:
+    # - admin
+    # - editor
 
-site_url: https://chaddugas.me
-display_url: https://chaddugas.me
+site_url: https://www.chaddugas.me
+display_url: https://www.chaddugas.me
 
 show_preview_links: true
 
@@ -23,8 +24,6 @@ collections:
     folder: "navigation"
     create: true
     slug: "{{slug}}"
-    extension: json
-    format: json
     editor:
       preview: false
     fields:
