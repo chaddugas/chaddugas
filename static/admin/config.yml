@@ -6,7 +6,7 @@ backend:
     - editor
 
 site_url: https://chaddugas.me
-display_url: https://chaddugas.mes
+display_url: https://chaddugas.me
 
 show_preview_links: true
 
