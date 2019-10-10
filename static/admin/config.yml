@@ -1,10 +1,12 @@
 backend:
   name: git-gateway
   branch: master
+  accept_roles:
+    - admin
+    - editor
 
 site_url: https://chaddugas.me
-display_url: https://chaddugas.me
-logo_url: https://chaddugas.tech/image-library/logo-empty.svg
+display_url: https://chaddugas.mes
 
 show_preview_links: true
 
