@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: chaddugas/me
+  name: git-gateway
   branch: master
   accept_roles:
     - admin
