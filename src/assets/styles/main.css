@@ -4424,6 +4424,7 @@ screen and (max-height: 300px) {
 	align-items: center;
 	max-width: 50%;
 	-webkit-box-align: center;
+	cursor: pointer;
 }
 
 .headerMain .header-mainContainer .headerMain-logo img {

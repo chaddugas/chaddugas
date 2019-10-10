@@ -15,8 +15,15 @@ module.exports = {
     {
       use: '@gridsome/source-filesystem',
       options: {
-        path: 'main-nav/**/*.md',
+        path: 'static/data/main-nav/**/*.md',
         typeName: 'MainNav'
+      }
+    },
+    {
+      use: '@gridsome/source-filesystem',
+      options: {
+        path: 'static/data/main-banner/**/*.md',
+        typeName: 'MainBanner'
       }
     },
     {

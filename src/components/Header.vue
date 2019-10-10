@@ -1,7 +1,7 @@
 <template lang="pug">
-	header.headerMain
+	header.headerMain(:class="{'js-header-fixed': fixed}")
 		.header-mainContainer
-			.headerMain-logo
+			.headerMain-logo(@click="navigate(false)")
 				img.logo-full(src='@/assets/images/logo.svg')
 				img.logo-empty(src='@/assets/images/logo-empty.svg')
 			.headerMain-nav
@@ -10,7 +10,7 @@
 						li(
 							v-for="item in $static.nav.edges",
 							:class="{'has-children': item.node.subs.length}")
-							a(:href='item.node.link') {{ item.node.title }}
+							a(@click='navigate(item.node.link)') {{ item.node.title }}
 								span
 							ul(v-if="item.node.subs.length")
 								li(v-for="sub in item.node.subs")
@@ -21,11 +21,12 @@
 
 <static-query>
 query Nav {
-	nav: allMainNav(sortBy: "order") {
+	nav: allMainNav(sortBy: "order", order: ASC) {
 		edges {
 			node {
 				title
 				link
+				order
 				subs {
 					link
 					icon
@@ -40,11 +41,38 @@ query Nav {
 export default {
   name: "Header",
   data() {
-    return {};
+    return {
+			fixed: false,
+		};
   },
   methods: {
-    navigate() {}
-  }
+		stick() {
+			this.fixed = window.scrollY > 60 ? true : false
+		},
+		navigate(dest) {
+			let top = window.scrollY * -1
+			if (dest) {
+				top = document.querySelector(dest).getBoundingClientRect().top - this.$el.offsetHeight
+			}
+			window.scrollBy({
+				top,
+				behavior: "smooth"
+			})
+		},
+		add_events() {
+			window.addEventListener('scroll', this.stick)
+		},
+		remove_events() {
+			window.removeEventListener('scroll', this.stick)
+		}
+	},
+	mounted() {
+		this.stick()
+		this.add_events()
+	},
+	beforeDestroy() {
+		this.remove_events()
+	}
 };
 </script>
 

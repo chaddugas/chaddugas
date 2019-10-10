@@ -22,7 +22,7 @@ slug:
 collections:
   - name: "main-navigation"
     label: "Main Navigation"
-    folder: "main-nav"
+    folder: "static/data/main-nav"
     create: true
     editor:
       preview: false
@@ -39,3 +39,14 @@ collections:
           - {label: "Title", name: "title", widget: "string"}
           - {label: "Link", name: "link", widget: "string"}
           - {label: "Icon Class", name: "icon", widget: "string"}
+  - name: "main-banner"
+    label: "Main Banner"
+    folder: "static/data/main-banner"
+    fields:
+      - {label: "Super Text", name: "super", widget: "string"}
+      - {label: "Main Text", name: "main", widget: "string"}
+      - {label: "Sub Text", name: "sub", widget: "string"}
+      - label: "Featured Image"
+        name: "image"
+        widget: "image"
+        allow_multiple: false
