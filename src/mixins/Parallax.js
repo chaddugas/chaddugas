@@ -2,7 +2,7 @@ export default {
 	data() {
 		return {
 			para_distance: 500,
-			para_start: window.innerHeight,
+			para_start: 0,
 			para_end: 0,
 			para_state: 'translateY(0)'
 		}
