@@ -1,5 +1,5 @@
 module.exports = {
-  siteName: 'Gridsome',
+  siteName: 'Chad Dugas Portfolio',
   transformers: {
     remark: {
       externalLinksTarget: '_blank',

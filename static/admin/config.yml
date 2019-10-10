@@ -1,10 +1,10 @@
 backend:
   name: github
   repo: chaddugas/me
-  # name: git-gateway
-  # accept_roles:
-    # - admin
-    # - editor
+  branch: master
+  accept_roles:
+    - admin
+    - editor
 
 site_url: https://www.chaddugas.me
 display_url: https://www.chaddugas.me
@@ -19,15 +19,14 @@ slug:
   clean_accents: true
 
 collections:
-  - name: "nav"
-    label: "Navigation"
-    folder: "navigation"
+  - name: "main-navigation"
+    label: "Main Navigation"
+    folder: "main-nav"
     create: true
-    slug: "{{slug}}"
     editor:
       preview: false
     fields:
-      - {label: "Title", name: "title", widget: "string", pattern: [".{4,}", "Must have at least 4 characters"]}
+      - {label: "Title", name: "title", widget: "string"}
       - {label: "Link", name: "link", widget: "string"}
       - label: "Sub Navigation"
         name: "subs"
@@ -35,5 +34,6 @@ collections:
         required: false
         allow_add: true
         fields:
-          - {label: "Title", name: "title", widget: "string", pattern: [".{4,}", "Must have at least 4 characters"]}
+          - {label: "Title", name: "title", widget: "string"}
           - {label: "Link", name: "link", widget: "string"}
+          - {label: "Icon Class", "icon", widget: "string"}
