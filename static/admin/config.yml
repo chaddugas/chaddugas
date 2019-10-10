@@ -36,4 +36,4 @@ collections:
         fields:
           - {label: "Title", name: "title", widget: "string"}
           - {label: "Link", name: "link", widget: "string"}
-          - {label: "Icon Class", "icon", widget: "string"}
+          - {label: "Icon Class", name: "icon", widget: "string"}

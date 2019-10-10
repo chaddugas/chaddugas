@@ -15,13 +15,8 @@ module.exports = {
     {
       use: '@gridsome/source-filesystem',
       options: {
-        path: 'navigation/**/*.md',
-        typeName: 'Navigation',
-        remark: {
-          plugins: [
-            // ...local plugins
-          ]
-        }
+        path: 'main-nav/**/*.md',
+        typeName: 'MainNav'
       }
     },
     {

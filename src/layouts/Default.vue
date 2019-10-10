@@ -1,25 +1,17 @@
-<template>
-  <div class="layout">
-    <header class="header">
-      <strong>
-        <g-link to="/">{{ $static.metadata.siteName }}</g-link>
-      </strong>
-      <nav class="nav">
-        <g-link class="nav__link" to="/">Home</g-link>
-        <g-link class="nav__link" to="/about/">About</g-link>
-      </nav>
-    </header>
-    <slot/>
-  </div>
+<template lang="pug">
+	.layout
+		app-header
 </template>
 
-<static-query>
-query {
-  metadata {
-    siteName
-  }
+<script>
+import Header from '~/components/Header.vue'
+
+export default {
+	components: {
+		appHeader: Header
+	}
 }
-</static-query>
+</script>
 
 <style>
 body {
