@@ -7,6 +7,14 @@
       "description": "# American Campus Communities 25th Anniversary\n\nThis was a brochure page for the 25th anniversary of American Campus Communities. It was built with Vanilla JS. All of the animations and scroll effects were designed and developed specifically for this project.\n\n> Vanilla JS\n\n> Custom Animations\n\n> Front-end Lead",
       "link": "https://www.americancampus.com/timeline",
       "visible": true
+    },
+    {
+      "title": "The Arthritis Foundation",
+      "photo": "/media/arth_sm.png",
+      "secondary_photo": "/media/arth_lg.png",
+      "description": "This was a complete redesign and reimplementation of the Arthritis Foundation's public facing website. It was a long project that lead to the redesign and implementation of two other sub sites (Arthritis Connect Groups, and Arthritis LiveYes!). \n\nThe home article pages were build as static pages using Vanilla JS for animations and interactions. The Search, Find a Doctor, and Article Listing pages are single page Vue.JS applications that get and post data to an API, displaying data managed in their CMS.\n\n> Vanilla JS\n\n> Vue.JS\n\n> Custom Animations\n\n> Front-end Lead",
+      "link": "https://www.arthritis.org/",
+      "visible": true
     }
   ]
 }
