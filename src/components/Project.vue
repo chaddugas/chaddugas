@@ -226,7 +226,7 @@ export default {
       text-shadow: 0 0 10px rgba($black, 0.25);
       transition: 0.25s ease;
       z-index: 3;
-      pointer-events: all;
+			pointer-events: none;
     }
   }
   &::before {
@@ -296,8 +296,10 @@ export default {
       opacity: 0;
     }
     a {
-      opacity: 1;
-      // pointer-events: all;
+			opacity: 1;
+			i {
+				pointer-events: all;
+			}
     }
   }
   .project-name {
