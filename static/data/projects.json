@@ -1,7 +1,7 @@
 {
   "projects": [
     {
-      "title": "American Campus Communities 25th Anniversary",
+      "title": "American Campus Communities",
       "photo": "/media/acc_sm.png",
       "secondary_photo": "/media/acc_lg.png",
       "description": "# American Campus Communities 25th Anniversary\n\nThis was a brochure page for the 25th anniversary of American Campus Communities. It was built with Vanilla JS. All of the animations and scroll effects were designed and developed specifically for this project.\n\n> Vanilla JS\n\n> Custom Animations\n\n> Front-end Lead",
@@ -12,15 +12,15 @@
       "title": "The Arthritis Foundation",
       "photo": "/media/arth_sm.png",
       "secondary_photo": "/media/arth_lg.png",
-      "description": "This was a complete redesign and reimplementation of the Arthritis Foundation's public facing website. It was a long project that lead to the redesign and implementation of two other sub sites (Arthritis Connect Groups, and Arthritis LiveYes!). \n\nThe home article pages were build as static pages using Vanilla JS for animations and interactions. The Search, Find a Doctor, and Article Listing pages are single page Vue.JS applications that get and post data to an API, displaying data managed in their CMS.\n\n> Vanilla JS\n\n> Vue.JS\n\n> Custom Animations\n\n> Front-end Lead",
+      "description": "# The Arthritis Foundation\n\nThis was a complete redesign and reimplementation of the Arthritis Foundation's public facing website. It was a long project that lead to the redesign and implementation of two other sub sites (Arthritis Connect Groups, and Arthritis LiveYes!). \n\nThe home article pages were build as static pages using Vanilla JS for animations and interactions. The Search, Find a Doctor, and Article Listing pages are single page Vue.JS applications that get and post data to an API, displaying data managed in their CMS.\n\n> Vanilla JS\n\n> Vue.JS\n\n> Custom Animations\n\n> Front-end Lead",
       "link": "https://www.arthritis.org/",
       "visible": true
     },
     {
-      "title": "American Society for Biochemistry and Molecular Biology",
+      "title": "ASBMB",
       "photo": "/media/asbmb_sm.png",
       "secondary_photo": "/media/asbmb_lg.png",
-      "description": "Redesign and reimplementation of the ASBMB public facing website and member portal. I was the lead front-end developer on the project, but delegated tasks to other team mates who assisted.\n\n> jQuery\n\n> Vanilla JS\n\n> Front-end Collaboration",
+      "description": "# American Society for Biochemistry and Molecular Biology\n\nRedesign and reimplementation of the ASBMB public facing website and member portal. I was the lead front-end developer on the project, but delegated tasks to other team mates who assisted.\n\n> jQuery\n\n> Vanilla JS\n\n> Front-end Collaboration",
       "link": "https://www.asbmb.org/",
       "visible": true
     }
