@@ -5,49 +5,49 @@ backend:
     - admin
     - editor
 
-site_url: https://www.chaddugas.me
-display_url: https://www.chaddugas.me
-# logo_url: https://your-site.com/images/logo.svg
+site_url: https://chaddugas.me
+display_url: https://chaddugas.me
+logo_url: /media/logo/logo.png
 
 show_preview_links: true
 
-media_folder: "static/media"
-public_folder: "/media"
-
-slug:
-  encoding: "ascii"
-  clean_accents: true
+media_folder: 'static/media'
+public_folder: '/media'
 
 collections:
-  - name: "main-navigation"
-    label: "Main Navigation"
-    folder: "static/data/main-nav"
-    create: true
+  - name: 'content'
+    label: 'Site Content'
     editor:
       preview: false
-    fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Link", name: "link", widget: "string"}
-      - {label: "Order", name: "order", widget: "number"}
-      - label: "Sub Navigation"
-        name: "subs"
-        widget: "list"
-        required: false
-        allow_add: true
+    files:
+      - name: 'projects'
+        label: 'Projects' 
+        file: 'static/data/projects.json'
         fields:
-          - {label: "Title", name: "title", widget: "string"}
-          - {label: "Link", name: "link", widget: "string"}
-          - {label: "Icon Class", name: "icon", widget: "string"}
-  - name: "main-banner"
-    label: "Main Banner"
-    folder: "static/data/main-banner"
-    delete: false
-    preview_path: /
-    fields:
-      - {label: "Super Text", name: "super", widget: "string"}
-      - {label: "Main Text", name: "main", widget: "string"}
-      - {label: "Sub Text", name: "sub", widget: "string"}
-      - label: "Featured Image"
-        name: "image"
-        widget: "image"
-        allow_multiple: false
+          - label: 'Projects' 
+            name: 'projects'
+            widget: 'list'
+            allow_add: true
+            required: true
+            fields:
+              - {label: 'Title', name: 'title', widget: 'string'}
+              - {label: 'Photo', name: 'photo', widget: 'image'}
+              - {label: 'Secondary Photo', name: 'secondary_photo', widget: 'image', required: false}
+              - {label: 'Description', name: 'description', widget: 'markdown'}
+              - {label: 'Visible', name: 'visible', widget: 'boolean', default: true}
+
+      - name: 'contact'
+        label: 'Contacts' 
+        file: 'static/data/contact.json'
+        fields:
+          - {label: 'Title', name: 'title', widget: 'markdown'}
+          - label: 'Contact Item' 
+            name: 'contacts'
+            widget: 'list'
+            allow_add: true
+            required: true
+            fields:
+              - {label: 'Logo', name: 'logo', widget: 'string'}
+              - {label: 'Title', name: 'title', widget: 'string'}
+              - {label: 'Information', name: 'info', widget: 'text'}
+              - {label: 'Link', name: 'link', widget: 'string'}

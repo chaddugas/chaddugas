@@ -1,0 +1,29 @@
+{
+  "title": "# Contact\n\nCheckout my work or drop me a line.",
+  "contacts": [
+    {
+      "logo": "fab fa-github",
+      "title": "Github",
+			"info": "Look at the source code for my freelance projects.",
+			"link": "/"
+    },
+    {
+      "logo": "fab fa-codepen",
+      "title": "Codepen",
+			"info": "This is where I like to play with new ideas.",
+			"link": "/"
+    },
+    {
+      "logo": "fab fa-twitter",
+      "title": "Twitter",
+			"info": "Read any of the 5 things I have ever tweeted.",
+			"link": "/"
+    },
+    {
+      "logo": "fab fa-instagram",
+      "title": "Instagram",
+			"info": "Mostly dogs, mountains, and food.",
+			"link": "/"
+    }
+  ]
+}

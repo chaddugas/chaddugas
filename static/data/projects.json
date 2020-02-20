@@ -1,0 +1,46 @@
+{
+  "projects": [
+    {
+      "title": "Project 1 Title",
+      "photo": "//via.placeholder.com/600",
+      "secondary_photo": "//via.placeholder.com/600",
+      "description": "# Project name \n\n project description",
+      "visible": true
+    },
+    {
+      "title": "Project 2 Title",
+      "photo": "//via.placeholder.com/600",
+      "secondary_photo": "//via.placeholder.com/600",
+      "description": "# Project name \n\n project description",
+      "visible": true
+    },
+    {
+      "title": "Project 3 Title",
+      "photo": "//via.placeholder.com/600",
+      "secondary_photo": "//via.placeholder.com/600",
+      "description": "# Project name \n\n project description",
+      "visible": true
+    },
+    {
+      "title": "Project 4 Title",
+      "photo": "//via.placeholder.com/600",
+      "secondary_photo": "//via.placeholder.com/600",
+      "description": "# Project name \n\n project description",
+      "visible": true
+    },
+    {
+      "title": "Project 5 Title",
+      "photo": "//via.placeholder.com/600",
+      "secondary_photo": "//via.placeholder.com/600",
+      "description": "# Project name \n\n project description",
+      "visible": true
+    },
+    {
+      "title": "Project 6 Title",
+      "photo": "//via.placeholder.com/600",
+      "secondary_photo": "//via.placeholder.com/600",
+      "description": "# Project name \n\n project description",
+      "visible": true
+    }
+  ]
+}
