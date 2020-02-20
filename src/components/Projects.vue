@@ -40,6 +40,7 @@ query {
           photo
 					secondary_photo
           description
+					link
           visible
         }
       }
@@ -56,10 +57,10 @@ query {
 .projects-inner {
   display: flex;
   flex-wrap: wrap;
-    width: calc(100% + 40px);
-    margin: 0 -20px -20px;
+  width: calc(100% + 40px);
+  margin: 0 -20px -20px;
   position: relative;
-  z-index: 1;
+  z-index: 3;
 }
 
 .projects-title {

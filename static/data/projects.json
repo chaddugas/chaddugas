@@ -1,52 +1,12 @@
 {
   "projects": [
     {
-      "title": "Project 1 Title",
-      "photo": "//via.placeholder.com/600",
-      "secondary_photo": "//via.placeholder.com/1200x600",
-      "description": "# Project name \n\n project description",
-			"visible": true,
-			"url": "/"
-    },
-    {
-      "title": "Project 2 Title",
-      "photo": "//via.placeholder.com/600",
-      "secondary_photo": "//via.placeholder.com/1200x600",
-      "description": "# Project name \n\n project description",
-			"visible": true,
-			"url": "/"
-    },
-    {
-      "title": "Project 3 Title",
-      "photo": "//via.placeholder.com/600",
-      "secondary_photo": "//via.placeholder.com/1200x600",
-      "description": "# Project name \n\n project description",
-			"visible": true,
-			"url": "/"
-    },
-    {
-      "title": "Project 4 Title",
-      "photo": "//via.placeholder.com/600",
-      "secondary_photo": "//via.placeholder.com/1200x600",
-      "description": "# Project name \n\n project description",
-			"visible": true,
-			"url": "/"
-    },
-    {
-      "title": "Project 5 Title",
-      "photo": "//via.placeholder.com/600",
-      "secondary_photo": "//via.placeholder.com/1200x600",
-      "description": "# Project name \n\n project description",
-			"visible": true,
-			"url": "/"
-    },
-    {
-      "title": "Project 6 Title",
-      "photo": "//via.placeholder.com/600",
-      "secondary_photo": "//via.placeholder.com/1200x600",
-      "description": "# Project name \n\n project description",
-			"visible": true,
-			"url": "/"
+      "title": "American Campus Communities 25th Anniversary",
+      "photo": "/media/acc_sm.png",
+      "secondary_photo": "/media/acc_lg.png",
+      "description": "# American Campus Communities 25th Anniversary\n\n This was a brochure page for the 25th anniversary of American Campus Communities. It was built with Vanilla JS. All of the animations and scroll effects were designed and developed specifically for this project.",
+			"link": "https://www.americancampus.com/timeline",
+			"visible": true
     }
   ]
 }

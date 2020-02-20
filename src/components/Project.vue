@@ -5,7 +5,9 @@
 				.project-data
 					.project-image
 						img(:src="project.photo")
-						img(:src="project.secondary_photo || project.photo")
+						a(:href="project.link", target="_blank", @click.stop="")
+							i.fas.fa-external-link-alt
+							img(:src="project.secondary_photo || project.photo")
 					.project-name
 						h3 {{ project.title }}
 				Markdown.project-wysiwyg {{ project.description }}
@@ -37,6 +39,27 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+
+
+.project-wysiwyg {
+	h1 {
+		margin: 0 0 2rem !important;
+		padding: 1rem !important;
+		background: $teal !important;
+		color: $white !important;
+		font-weight: 300 !important;
+		line-height: 1.4 !important;
+		font-family: $body !important;
+		font-size: 2rem !important;
+		text-align: center !important;
+	}
+	p {
+		margin: 0 1rem !important;
+	}
+}
+</style>
 
 <style lang="scss" scoped>
 .project {
@@ -123,7 +146,8 @@ export default {
     transition: 500ms ease;
     will-change: transform, filter;
   }
-  img {
+  img,
+  a {
     transition: 250ms ease;
     max-width: 100%;
     position: absolute;
@@ -132,8 +156,41 @@ export default {
     right: 0;
     bottom: 0;
     opacity: 1;
-    &:nth-child(2) {
+  }
+  a {
+    pointer-events: none;
+    opacity: 0;
+    &:hover {
+      i {
+				color: $yellow;
+      }
+      &::before {
+        opacity: 1;
+      }
+    }
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
+      pointer-events: none;
+      content: "";
+      background: rgba($black, 0.25);
       opacity: 0;
+      transition: 0.25s ease;
+    }
+    i {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      font-size: 2.5rem;
+      color: $white;
+      text-shadow: 0 0 10px rgba($black, 0.25);
+      transition: 0.25s ease;
+			z-index: 3;
+			pointer-events: all;
     }
   }
   &::before {
@@ -141,7 +198,7 @@ export default {
     position: relative;
     display: block;
     padding-top: 100%;
-		transition: 0.25s ease;
+    transition: 0.25s ease;
   }
 }
 
@@ -178,7 +235,7 @@ export default {
   margin: 20px;
   opacity: 0;
   visibility: hidden;
-  will-change: opacity;
+	will-change: opacity;
 }
 
 .project.active {
@@ -192,31 +249,23 @@ export default {
     overflow-y: auto;
     pointer-events: all;
   }
-  .project-data {
-    // width: 350px;
-    // max-width: 40%;
-    // @media (min-width: $md) {
-    //   width: 475px;
-    //   max-width: 55%;
-    // }
-  }
   .project-image {
     transform: scale(1, 1);
     filter: none;
     margin: 20px 20px 10px;
-		&::before {
-			padding-top: 50%;
-		}
-    img {
+    &::before {
+      padding-top: 50%;
+    }
+    & > img {
       opacity: 0;
-      &:nth-child(2) {
-				// position: static;
-        opacity: 1;
-      }
+    }
+    a {
+      opacity: 1;
+      // pointer-events: all;
     }
   }
   .project-name {
-		display: none;
+    display: none;
   }
   .project-wysiwyg {
     opacity: 1;
