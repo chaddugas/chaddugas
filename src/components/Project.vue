@@ -192,9 +192,9 @@ export default {
     right: 0;
     bottom: 0;
     opacity: 1;
+    pointer-events: none;
   }
   a {
-    pointer-events: none;
     opacity: 0;
     &:hover {
       i {
