@@ -1,7 +1,7 @@
 export default {
 	data() {
 		return {
-			c_color: 'rgba(123, 61, 186, 0.3)',
+			c_color: 'rgba(123, 61, 186, 0.1)',
 			c_lineWidth: .2,
 			c_wrapper: null,
 			c_canvas: null,
@@ -44,7 +44,7 @@ export default {
 			const dots = {
 				total: 250,
 				proximity: 80,
-				radius: 100,
+				radius: 300,
 				array: []
 			}
 
@@ -105,7 +105,7 @@ export default {
 				draw() {
 					_this.c_ctx.beginPath();
 					_this.c_ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-					_this.c_ctx.fill();
+					// _this.c_ctx.fill();
 				}
 			}
 

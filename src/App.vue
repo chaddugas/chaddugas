@@ -20,6 +20,7 @@ html {
   width: 100%;
   margin: 0;
   padding: 0;
+  background-color: $onyx;
 }
 
 body {
@@ -31,18 +32,16 @@ body {
   font-weight: $b_weight;
   font-size: $b_size;
   line-height: 1.4;
-  background: $gray;
-	color: $onyx;
+  background-color: $gray;
+  color: $onyx;
+  position: relative;
 }
 
 main {
-	z-index: 1;
-	overflow-x: hidden;
-	min-height: 100vh;
-	// max-height: 100vh;
-	// overflow-y: auto;
-	scroll-snap-type: y proximity;
-	scroll-snap-points-y: 85vh;
+  z-index: 1;
+  overflow-x: hidden;
+  min-height: 100vh;
+	background: $gray;
 }
 
 section {
@@ -61,11 +60,11 @@ h6 {
 }
 
 [class*="wysiwyg"] {
-	line-height: 1.6;
-	font-size: 18px;
-	img {
-		max-width: 100%;
-	}
+  line-height: 1.6;
+  font-size: 18px;
+  img {
+    max-width: 100%;
+  }
   a {
     text-decoration: none;
   }
@@ -140,9 +139,9 @@ h6 {
   h4,
   h5,
   h6 {
-		font-weight:700;
-		line-height:1.2;
-		color: $onyx;
+    font-weight: 700;
+    line-height: 1.2;
+    color: $onyx;
   }
   h1:first-child,
   h2:first-child,
@@ -157,18 +156,18 @@ h6 {
     margin-bottom: 0.58333em;
     margin-top: 0.58333em;
     line-height: 1;
-		@media (min-width: $md) {
-			font-size: 2.4em;
-		}
+    @media (min-width: $md) {
+      font-size: 2.4em;
+    }
   }
   h2 {
     font-size: 1.4em;
     margin-bottom: 0.875em;
     margin-top: 1.75em;
     line-height: 1.1;
-		@media (min-width: $md) {
-			font-size: 1.6em;
-		}
+    @media (min-width: $md) {
+      font-size: 1.6em;
+    }
   }
   h3 {
     font-size: 1.3em;
@@ -235,39 +234,39 @@ h6 {
     list-style-type: circle;
   }
   blockquote {
-		padding: 0.4em 1.5em 0.4em 0;
-		text-align: right;
-		font-family: $headings, sans-serif;
-		position: relative;
-		z-index: 1;
-		color: lighten($onyx, 20%);
-		font-style: italic;
-		font-size: 1.1rem;
-		margin: 1.75rem 0;
-		@media (min-width: $md) {
-			margin: 2.25rem 3rem;
-		font-size: 1.2rem;
-		padding: 0.6em 1.2em;
-		}
-		&:after {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			right: 0;
-			width: 8px;
-			background: $orange;
-			z-index: 1;
-			content: '';
-		}
+    padding: 0.4em 1.5em 0.4em 0;
+    text-align: right;
+    font-family: $headings, sans-serif;
+    position: relative;
+    z-index: 1;
+    color: lighten($onyx, 20%);
+    font-style: italic;
+    font-size: 1.1rem;
+    margin: 1.75rem 0;
+    @media (min-width: $md) {
+      margin: 2.25rem 3rem;
+      font-size: 1.2rem;
+      padding: 0.6em 1.2em;
+    }
+    &:after {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 8px;
+      background: $orange;
+      z-index: 1;
+      content: "";
+    }
   }
   blockquote p {
     margin-bottom: 0;
-		&:before {
-			content: '"'
-		}
-		&:after {
-			content: '"'
-		}
+    &:before {
+      content: '"';
+    }
+    &:after {
+      content: '"';
+    }
   }
   code,
   kbd,

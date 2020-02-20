@@ -1,5 +1,5 @@
 <template lang="pug">
-header.logo(:class="{'is-flipped': flipped}")
+header.logo
 	.logo-inner
 		h1.logo-name Chad Dugas
 		h2.logo-title
@@ -15,27 +15,28 @@ header.logo(:class="{'is-flipped': flipped}")
 
 <script>
 export default {
-	name: "HeroLogo",
-	props: ["flipped"]
+  name: "HeroLogo"
 };
 </script>
 
 <style lang="scss">
 .logo {
-	background: $purple;
-	transition: 0.25s ease;
+  position: relative;
+  grid-area: 1 / 1 / 3 / 3;
+  background: $purple;
+  transition: 0.25s ease;
   transition: opacity 0.6s ease, transform 0.8s ease;
   transform: translateZ(1px) rotateY(0deg);
   opacity: 1;
-	transform-style: preserve-3d;
-	&.is-flipped {
-		opacity: 0;
-		transform: translateZ(1px) rotateY(180deg);
-		.logo-inner {
-			opacity: 0;
-			transition: opacity 0.4s ease;
-		}
-	}
+  transform-style: preserve-3d;
+  &.is-flipped {
+    opacity: 0;
+    transform: translateZ(1px) rotateY(180deg);
+    .logo-inner {
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+  }
 }
 
 .logo-inner {
@@ -47,10 +48,10 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 1.5rem;
+  padding: 1.25rem;
   transition: opacity 0.4s 0.4s ease;
-	text-align: right;
-	color: $white;
+  text-align: right;
+  color: $white;
   @media (min-width: $md) {
     padding: 3rem;
   }
@@ -76,7 +77,7 @@ export default {
 }
 
 .logo-name {
-  @include fluid-type(600px, 1450px, 28px, 56px);
+  @include fluid-type(600px, 1450px, 24px, 56px);
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -84,13 +85,19 @@ export default {
   color: $white;
   line-height: 1;
   text-transform: uppercase;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  @media (min-width: $sm) {
+    margin-bottom: 1rem;
+  }
 }
 
 .logo-title {
   @include fluid-type(600px, 1450px, 18px, 28px);
-  margin-bottom: 2rem;
-	text-transform: lowercase;
+  text-transform: lowercase;
+  margin-bottom: 1rem;
+  @media (min-width: $sm) {
+    margin-bottom: 2rem;
+  }
   span {
     &:first-child {
       margin-right: 1rem;
@@ -107,9 +114,15 @@ export default {
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
-  margin: 0 -0.5rem;
+  margin: 0 -0.25rem;
   i {
-    margin: 0 0.5rem;
+    margin: 0 0.25rem;
+  }
+  @media (min-width: $sm) {
+    margin: 0 -0.5rem;
+    i {
+      margin: 0 0.5rem;
+    }
   }
 }
 </style>

@@ -56,22 +56,18 @@ query {
 .projects-inner {
   display: flex;
   flex-wrap: wrap;
-  width: calc(100% + 10px);
-  margin: 0 -5px -5px;
-  position: relative;
-  z-index: 1;
-  @media (min-width: $md) {
     width: calc(100% + 40px);
     margin: 0 -20px -20px;
-  }
+  position: relative;
+  z-index: 1;
 }
 
 .projects-title {
   position: relative;
   z-index: -1;
-  flex: 0 0 calc(50% - 5px);
-  width: calc(50% - 5px);
-  margin: 0 2.5px 5px;
+  flex: 0 0 calc(50% - 20px);
+  width: calc(50% - 20px);
+  margin: 0 10px 20px;
   background: $red;
   transition: none;
   transition-delay: 0;
@@ -84,7 +80,6 @@ query {
   @media (min-width: $md) {
     flex: 0 0 calc(33.333% - 20px);
     width: calc(33.333% - 20px);
-    margin: 0 10px 20px;
   }
   h2 {
     position: absolute;

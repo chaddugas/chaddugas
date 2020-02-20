@@ -71,11 +71,12 @@ query {
 
 <style lang="scss">
 .contact-wysiwyg {
-	* {
-		&:last-child {
-			margin-bottom: 0;
-		}
-	}
+  * {
+    color: $white !important;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 </style>
 
@@ -91,48 +92,16 @@ query {
 }
 
 .contact-content {
-  background: $white;
+  background: $teal;
   align-self: stretch;
   position: relative;
-	margin-bottom: 20px;
-	min-height: 150px;
+  margin-bottom: 20px;
+  min-height: 150px;
   z-index: 1;
   @media (min-width: $lg) {
     margin-right: 20px;
     margin-bottom: 0;
     flex: 0 1 450px;
-  }
-  &:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 10%;
-    right: 40%;
-    z-index: -1;
-    background-image: linear-gradient(
-      to bottom right,
-      rgba($gray, 0.35),
-      rgba($gray, 0.35) 50%,
-      transparent 50%,
-      transparent
-    );
-  }
-  &:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0%;
-    bottom: 40%;
-    right: 0;
-    z-index: -1;
-    background-image: linear-gradient(
-      to bottom left,
-      rgba($gray, 0.35),
-      rgba($gray, 0.35) 50%,
-      transparent 50%,
-      transparent
-    );
   }
 }
 
@@ -141,6 +110,7 @@ query {
   width: 100%;
   pointer-events: none;
   padding: 25px;
+  color: $white;
 }
 
 .contact-wysiwyg {
@@ -149,7 +119,7 @@ query {
   font-size: 1rem;
   &.hidden {
     opacity: 0;
-	}
+  }
 }
 
 .contact-info {
@@ -165,16 +135,15 @@ query {
   font-size: 24px;
   font-weight: 700;
   font-family: $headings;
-  color: $onyx;
   margin-bottom: 10px;
 }
 
 .contact-items {
   display: flex;
   flex-wrap: wrap;
-	z-index: 1;
-	width: calc(100% + 20px);
-	margin: 0 -10px -20px;
+  z-index: 1;
+  width: calc(100% + 20px);
+  margin: 0 -10px -20px;
   @media (min-width: $lg) {
     flex: 1 1 100%;
   }
@@ -189,48 +158,87 @@ query {
   cursor: pointer;
   position: relative;
   padding: 15px;
+  z-index: 1;
   &::before {
     content: "";
     position: relative;
     padding-top: 100%;
     display: block;
+    pointer-events: none;
   }
   &::after {
     position: absolute;
-    top: -2.5px;
-    left: -2.5px;
-    right: -2.5px;
-    bottom: -2.5px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 100%;
     z-index: -1;
     content: "";
+    transition: 0.25s ease;
+  }
+  &:hover::after {
+    right: 0;
+    bottom: 0;
   }
   @media (min-width: $lg) {
     flex: 0 0 calc(25% - 20px);
     width: calc(25% - 20px);
     padding: 20px;
   }
-  &:hover {
-    box-shadow: 0 0 3px 1px rgba($black, 0.08), 0 0 20px rgba($black, 0.05);
-    transform: scale(1.035, 1.035);
-  }
   &:nth-child(4n-3) {
     .contact-logo {
       color: $purple;
+    }
+    &:hover {
+      &::after {
+        background: $purple;
+      }
+      .contact-name,
+      .contact-logo {
+        color: $white;
+      }
     }
   }
   &:nth-child(4n-2) {
     .contact-logo {
       color: $onyx;
     }
+    &:hover {
+      &::after {
+        background: $onyx;
+      }
+      .contact-name,
+      .contact-logo {
+        color: $white;
+      }
+    }
   }
   &:nth-child(4n-1) {
     .contact-logo {
       color: $sky;
     }
+    &:hover {
+      &::after {
+        background: $sky;
+      }
+      .contact-name,
+      .contact-logo {
+        color: $white;
+      }
+    }
   }
   &:nth-child(4n) {
     .contact-logo {
       color: $red;
+    }
+    &:hover {
+      &::after {
+        background: $red;
+      }
+      .contact-name,
+      .contact-logo {
+        color: $white;
+      }
     }
   }
 }
@@ -259,6 +267,7 @@ query {
   margin-bottom: 5px;
   width: 100%;
   text-align: center;
+  transition: 0.25s ease;
   @media (min-width: $md) {
     font-size: 50px;
   }
@@ -269,6 +278,7 @@ query {
   text-align: center;
   font-size: 0.75rem;
   color: $onyx;
+  transition: 0.25s ease;
   width: 100%;
   @media (min-width: $md) {
     font-size: 1rem;

@@ -3,12 +3,8 @@
 		.about-inner(:class="{loaded: loaded}")
 			.about-content
 				.about-content-scroller
-					h3 I'm Chad.
-					p I'm a Senior Front-end Engineer and Front-end Team Lead, living and working in Colorado. I love to build challenging, visually exciting, and unique applications on the web. 
-					p One of my favorite things about development is the massive toolbox of languages, libraries, and methodologies that you can pull from. I am #[em not] one of those people who thinks if you want to be good at design, you have to be bad at logic, or vise-versa. I like to pride myself on being excellent at all aspects of web development. 
-					p In anycase, please feel free to have a look at any of my projects, and should the mood strike you, reach out on any to the platforms listed below. 
-					p
-						strong Cheers!
+					h3 {{title}}
+					Markdown.project-wysiwyg {{ content }}
 			span.about-block(
 				v-for="color in Object.keys(colors)", 
 				:class="`about-block--${color}`",
@@ -29,7 +25,14 @@ export default {
       colors: { purple: true, sky: true, red: true }
     };
   },
-  computed: {},
+  computed: {
+    title() {
+      return this.$static.about.edges[0].node.title;
+    },
+    content() {
+      return this.$static.about.edges[0].node.content;
+    }
+	},
   methods: {
     startInterval(color) {
       setInterval(() => {
@@ -44,6 +47,19 @@ export default {
   }
 };
 </script>
+
+<static-query>
+query {
+  about: allAbout {
+    edges {
+      node {
+				title
+				content
+      }
+    }
+  }
+}
+</static-query>
 
 <style lang="scss">
 .about-inner {

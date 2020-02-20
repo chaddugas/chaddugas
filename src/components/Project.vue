@@ -19,7 +19,7 @@ export default {
   props: ["project"],
   data() {
     return {
-			active: false
+      active: false
     };
   },
   methods: {
@@ -42,9 +42,9 @@ export default {
 .project {
   position: relative;
   z-index: -1;
-  flex: 0 0 calc(50% - 5px);
-  width: calc(50% - 5px);
-  margin: 0 2.5px 5px;
+  flex: 0 0 calc(50% - 20px);
+  width: calc(50% - 20px);
+  margin: 0 10px 20px;
   transition: z-index 0ms linear;
   transition-delay: 500ms;
   background-size: 0 0;
@@ -54,24 +54,9 @@ export default {
     position: relative;
     padding-top: 100%;
   }
-  &:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    background-size: cover;
-    background-position: 50% 50%;
-    background-image: inherit;
-    filter: grayscale(50%);
-    opacity: 0.25;
-  }
   @media (min-width: $md) {
     flex: 0 0 calc(33.333% - 20px);
     width: calc(33.333% - 20px);
-    margin: 0 10px 20px;
   }
 }
 
@@ -117,38 +102,6 @@ export default {
   @supports (mix-blend-mode: screen) {
     transition: 500ms ease;
   }
-  &:before {
-    content: "";
-    position: absolute;
-    top: 20%;
-    left: 0;
-    bottom: 0;
-    right: 40%;
-    z-index: -1;
-    background-image: linear-gradient(
-      to top right,
-      rgba($gray, 0.45),
-      rgba($gray, 0.45) 50%,
-      transparent 50%,
-      transparent
-    );
-  }
-  &:after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 20%;
-    top: 60%;
-    right: 0;
-    z-index: -1;
-    background-image: linear-gradient(
-      to top left,
-      rgba($gray, 0.45),
-      rgba($gray, 0.45) 50%,
-      transparent 50%,
-      transparent
-    );
-  }
 }
 
 .project-data {
@@ -156,7 +109,6 @@ export default {
   position: relative;
   width: 100%;
   max-width: 100%;
-  float: left;
   @supports (mix-blend-mode: screen) {
     transition: 500ms ease;
     will-change: width, max-width;
@@ -172,7 +124,7 @@ export default {
     will-change: transform, filter;
   }
   img {
-		transition: 250ms ease;
+    transition: 250ms ease;
     max-width: 100%;
     position: absolute;
     top: 0;
@@ -189,6 +141,7 @@ export default {
     position: relative;
     display: block;
     padding-top: 100%;
+		transition: 0.25s ease;
   }
 }
 
@@ -232,40 +185,38 @@ export default {
   z-index: 2;
   transition-delay: 0ms;
   .project-inner {
-    height: calc(200% + 5px);
-    width: calc(200% + 5px);
-    box-shadow: 0 0 3px 1px rgba($black, 0.08), 0 0 20px rgba($black, 0.05);
-    @media (min-width: $md) {
-      height: calc(200% + 20px);
-      width: calc(200% + 20px);
-    }
+    height: calc(200% + 20px);
+    width: calc(200% + 20px);
   }
   .project-content {
     overflow-y: auto;
     pointer-events: all;
   }
   .project-data {
-    width: 350px;
-		max-width: 40%;
-		@media (min-width: $md) {
-			width: 475px;
-			max-width: 55%;
-		}
+    // width: 350px;
+    // max-width: 40%;
+    // @media (min-width: $md) {
+    //   width: 475px;
+    //   max-width: 55%;
+    // }
   }
   .project-image {
-		transform: scale(1, 1);
-		filter: none;
+    transform: scale(1, 1);
+    filter: none;
     margin: 20px 20px 10px;
+		&::before {
+			padding-top: 50%;
+		}
     img {
       opacity: 0;
       &:nth-child(2) {
+				// position: static;
         opacity: 1;
       }
     }
   }
   .project-name {
-    transform: translateY(0);
-    opacity: 0;
+		display: none;
   }
   .project-wysiwyg {
     opacity: 1;
@@ -277,28 +228,22 @@ export default {
   &:nth-child(2) {
     .project-inner {
       top: 0;
-      left: calc(-100% - 5px);
+      left: calc(-100% - 20px);
     }
   }
   &:nth-child(2n + 3) {
     .project-inner {
-      top: calc(-100% - 5px);
+      top: calc(-100% - 20px);
       left: 0;
     }
   }
   &:nth-child(2n + 4) {
     .project-inner {
-      top: calc(-100% - 5px);
-      left: calc(-100% - 5px);
+      top: calc(-100% - 20px);
+      left: calc(-100% - 20px);
     }
   }
   @media (min-width: $md) {
-    &:nth-child(2) {
-      .project-inner {
-        top: 0;
-        left: calc(-100% - 20px);
-      }
-    }
     &:nth-child(3) {
       .project-inner {
         top: 0;

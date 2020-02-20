@@ -1,6 +1,6 @@
 <template lang='pug'>
 	.hero-cell(:class="{flipped}")
-		.cell-flipper(:style="{transitionDelay}")
+		.cell-flipper(:style="{transitionDelay}", v-if="active")
 			.cell-face.cell-face--front
 				.cell-fill(:style="style")
 			.cell-face.cell-face--back
@@ -9,23 +9,21 @@
 <script>
 export default {
   name: "HeroCell",
-  props: ["item", "active_cells"],
+  props: ["item", "active_cells", "all_cells"],
   data() {
     return {
-      colors: [
-        "#ed4939",
-        "#f87117",
-        "#adc607",
-        "#016FB9",
-        "#f4c10d"
-      ],
+      colors: ["#ed4939", "#f87117", "#adc607", "#016FB9", "#f4c10d"],
       style: {}
     };
   },
   computed: {
-		flipped() {
-			return !this.active_cells.includes(this.item)
+		active() {
+			return this.all_cells.includes(this.item)
 		},
+    flipped() {
+			if (!this.active) return false
+      return !this.active_cells.includes(this.item);
+    },
     transitionDelay() {
       if (this.active_cells.indexOf(this.item)) {
         return `${this.active_cells.indexOf(this.item) * 0.05 * 1000}ms`;
@@ -48,12 +46,12 @@ export default {
   perspective: 1000px;
   $r: 1;
   $c: 1;
-  @for $n from 1 through 25 {
-    @if $c > 5 {
+  @for $n from 1 through 45 {
+    @if $c > 3 {
       $c: 1;
       $r: $r + 1;
     }
-    @if $r > 5 {
+    @if $r > 15 {
       $r: 1;
     }
     &:nth-child(#{$n}) {
@@ -63,6 +61,66 @@ export default {
       grid-column-end: #{$c + 1};
     }
     $c: $c + 1;
+  }
+  $r: 1;
+  $c: 1;
+  @media (min-width: $sm) {
+    @for $n from 1 through 48 {
+      @if $c > 4 {
+        $c: 1;
+        $r: $r + 1;
+      }
+      @if $r > 12 {
+        $r: 1;
+      }
+      &:nth-child(#{$n}) {
+        grid-row-start: #{$r};
+        grid-row-end: #{$r + 1};
+        grid-column-start: #{$c};
+        grid-column-end: #{$c + 1};
+      }
+      $c: $c + 1;
+    }
+  }
+  $r: 1;
+  $c: 1;
+  @media (min-width: $lg) {
+    @for $n from 1 through 50 {
+      @if $c > 5 {
+        $c: 1;
+        $r: $r + 1;
+      }
+      @if $r > 10 {
+        $r: 1;
+      }
+      &:nth-child(#{$n}) {
+        grid-row-start: #{$r};
+        grid-row-end: #{$r + 1};
+        grid-column-start: #{$c};
+        grid-column-end: #{$c + 1};
+      }
+      $c: $c + 1;
+    }
+  }
+  $r: 1;
+  $c: 1;
+  @media (min-width: $xl) {
+    @for $n from 1 through 72 {
+      @if $c > 6 {
+        $c: 1;
+        $r: $r + 1;
+      }
+      @if $r > 12 {
+        $r: 1;
+      }
+      &:nth-child(#{$n}) {
+        grid-row-start: #{$r};
+        grid-row-end: #{$r + 1};
+        grid-column-start: #{$c};
+        grid-column-end: #{$c + 1};
+      }
+      $c: $c + 1;
+    }
   }
 }
 

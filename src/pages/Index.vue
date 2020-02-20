@@ -2,6 +2,7 @@
 	Layout
 		main
 			app-hero
+			.scrollPoint
 			app-projects
 			app-about
 			app-contact

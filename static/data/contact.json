@@ -5,25 +5,25 @@
       "logo": "fab fa-github",
       "title": "Github",
 			"info": "Look at the source code for my freelance projects.",
-			"link": "/"
+			"link": "https://github.com/chaddugas"
     },
     {
       "logo": "fab fa-codepen",
       "title": "Codepen",
 			"info": "This is where I like to play with new ideas.",
-			"link": "/"
+			"link": "https://codepen.io/chadd"
     },
     {
       "logo": "fab fa-twitter",
       "title": "Twitter",
 			"info": "Read any of the 5 things I have ever tweeted.",
-			"link": "/"
+			"link": "https://twitter.com/chad_dugas"
     },
     {
       "logo": "fab fa-instagram",
       "title": "Instagram",
-			"info": "Mostly dogs, mountains, and food.",
-			"link": "/"
+			"info": "Mostly dogs, nature, and food.",
+			"link": "https://www.instagram.com/chaddugas/"
     }
   ]
 }
