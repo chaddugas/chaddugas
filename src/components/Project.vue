@@ -41,23 +41,59 @@ export default {
 </script>
 
 <style lang="scss">
-
-
 .project-wysiwyg {
-	h1 {
-		margin: 0 0 2rem !important;
-		padding: 1rem !important;
-		background: $teal !important;
-		color: $white !important;
-		font-weight: 300 !important;
-		line-height: 1.4 !important;
-		font-family: $body !important;
-		font-size: 2rem !important;
-		text-align: center !important;
-	}
-	p {
-		margin: 0 1rem !important;
-	}
+  h1 {
+    margin: 0 0 2rem !important;
+    padding: 1rem !important;
+    background: $teal !important;
+    color: $white !important;
+    font-weight: 300 !important;
+    line-height: 1.4 !important;
+    font-family: $body !important;
+    font-size: 2rem !important;
+    text-align: center !important;
+  }
+  p {
+    margin: 0 0 1rem !important;
+    &:last-of-type {
+      margin-bottom: 2rem !important;
+    }
+  }
+  blockquote {
+    display: inline-block !important;
+    margin: 0 1rem 1rem 0 !important;
+    padding: 0.5rem !important;
+    background: $sky !important;
+    border: none !important;
+    font-size: 0.75rem !important;
+    font-style: normal !important;
+    color: $white !important;
+    & + blockquote {
+      background: $red !important;
+      & + blockquote {
+        background: $purple !important;
+        & + blockquote {
+          background: $green !important;
+        }
+      }
+    }
+    &::before,
+    &::after {
+      display: none !important;
+    }
+    *,
+    *:last-of-type {
+      margin: 0 !important;
+      padding: 0 !important;
+      color: $white !important;
+      font-size: 0.75rem !important;
+      border: none !important;
+      &::before,
+      &::after {
+        display: none !important;
+      }
+    }
+  }
 }
 </style>
 
@@ -162,7 +198,7 @@ export default {
     opacity: 0;
     &:hover {
       i {
-				color: $yellow;
+        color: $yellow;
       }
       &::before {
         opacity: 1;
@@ -189,8 +225,8 @@ export default {
       color: $white;
       text-shadow: 0 0 10px rgba($black, 0.25);
       transition: 0.25s ease;
-			z-index: 3;
-			pointer-events: all;
+      z-index: 3;
+      pointer-events: all;
     }
   }
   &::before {
@@ -235,7 +271,7 @@ export default {
   margin: 20px;
   opacity: 0;
   visibility: hidden;
-	will-change: opacity;
+  will-change: opacity;
 }
 
 .project.active {
