@@ -53,7 +53,7 @@ export default {
       }, 900);
     },
     flip() {
-      const total = window.innerHeight * 0.9;
+      const total = window.innerHeight * 0.75;
       const percentScroll =
         window.pageYOffset < total ? window.pageYOffset / total : 1;
 
