@@ -30,8 +30,8 @@ export default {
       inactive_cells: [],
       all_cells: [],
       prevPercentScroll: 0,
-			hide: false,
-			interval: null
+      hide: false,
+      interval: null
     };
   },
   computed: {
@@ -44,10 +44,13 @@ export default {
   },
   methods: {
     preventScroll() {
-			window.scrollBy(0, document.querySelector('.scrollPoint').getBoundingClientRect().top);
-			setTimeout(() => {
-				clearInterval(this.interval)
-			}, 900)
+      window.scrollBy(
+        0,
+        document.querySelector(".scrollPoint").getBoundingClientRect().top
+      );
+      setTimeout(() => {
+        clearInterval(this.interval);
+      }, 900);
     },
     flip() {
       const total = window.innerHeight * 0.9;
@@ -86,9 +89,13 @@ export default {
           );
         }
       }
-      if (percentScroll > this.prevPercentScroll && !this.active_cells.length && !this.hide) {
-				this.hide = true;
-				this.interval = setInterval(this.preventScroll, 1)
+      if (
+        percentScroll > this.prevPercentScroll &&
+        !this.active_cells.length &&
+        !this.hide
+      ) {
+        this.hide = true;
+        this.interval = setInterval(this.preventScroll, 1);
       } else if (percentScroll < this.prevPercentScroll) {
         this.hide = false;
       }
@@ -96,14 +103,17 @@ export default {
     }
   },
   created() {
-    let active_cells = [...Array(this.total + 1).keys()];
-    active_cells.shift();
-    active_cells = active_cells.filter(cell => {
-      if (this.media === "xs") return ![1, 2, 4, 5].includes(cell);
-      if (this.media === "sm") return ![1, 2, 5, 6].includes(cell);
-      if (this.media === "lg") return ![1, 2, 6, 7].includes(cell);
-      if (this.media === "xl") return ![1, 2, 7, 8].includes(cell);
-    });
+		let active_cells = [1, 2, 3]
+    if (process.isClient) {
+      active_cells = [...Array(this.total + 1).keys()];
+      active_cells.shift();
+      active_cells = active_cells.filter(cell => {
+        if (this.media === "xs") return ![1, 2, 4, 5].includes(cell);
+        if (this.media === "sm") return ![1, 2, 5, 6].includes(cell);
+        if (this.media === "lg") return ![1, 2, 6, 7].includes(cell);
+        if (this.media === "xl") return ![1, 2, 7, 8].includes(cell);
+      });
+    }
 
     this.active_cells = active_cells.filter((item, i) =>
       Math.random() >= 0.65 ? false : true
