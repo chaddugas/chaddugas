@@ -4,9 +4,9 @@
       "title": "American Campus Communities 25th Anniversary",
       "photo": "/media/acc_sm.png",
       "secondary_photo": "/media/acc_lg.png",
-      "description": "# American Campus Communities 25th Anniversary\n\n This was a brochure page for the 25th anniversary of American Campus Communities. It was built with Vanilla JS. All of the animations and scroll effects were designed and developed specifically for this project.",
-			"link": "https://www.americancampus.com/timeline",
-			"visible": true
+      "description": "# American Campus Communities 25th Anniversary\n\nThis was a brochure page for the 25th anniversary of American Campus Communities. It was built with Vanilla JS. All of the animations and scroll effects were designed and developed specifically for this project.\n\n> Vanilla JS\n\n> Custom Animations\n\n> Front-end Lead",
+      "link": "https://www.americancampus.com/timeline",
+      "visible": true
     }
   ]
 }
