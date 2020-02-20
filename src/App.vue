@@ -2,9 +2,6 @@
   router-view
 </template>
 
-<static-query>
-</static-query>
-
 <script>
 export default {
   name: "Portfolio"
