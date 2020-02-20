@@ -20,7 +20,7 @@
       "title": "ASBMB",
       "photo": "/media/asbmb_sm.png",
       "secondary_photo": "/media/asbmb_lg.png",
-      "description": "# American Society for Biochemistry and Molecular Biology\n\nRedesign and reimplementation of the ASBMB public facing website and member portal. I was the lead front-end developer on the project, but delegated tasks to other team mates who assisted.\n\n> jQuery\n\n> Vanilla JS\n\n> Front-end Collaboration",
+      "description": "# American Society for Biochemistry and Molecular&nbsp;Biology\n\nRedesign and reimplementation of the ASBMB public facing website and member portal. I was the lead front-end developer on the project, but delegated tasks to other team mates who assisted.\n\n> jQuery\n\n> Vanilla JS\n\n> Front-end Collaboration",
       "link": "https://www.asbmb.org/",
       "visible": true
     }
