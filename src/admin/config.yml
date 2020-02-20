@@ -5,9 +5,8 @@ backend:
     - admin
     - editor
 
-site_url: https://chaddugas.me
-display_url: https://chaddugas.me
-logo_url: /media/logo/logo.png
+site_url: https://chaddugas.netlify.com
+display_url: https://chaddugas.netlify.com
 
 show_preview_links: true
 
