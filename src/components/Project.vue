@@ -7,7 +7,7 @@
 						img(:src="project.photo")
 						a(:href="project.link", target="_blank", @click.stop="")
 							img(:src="project.secondary_photo || project.photo")
-							i.fas.fa-external-link-alt
+							span view
 					.project-name
 						h3 {{ project.title }}
 				Markdown.project-wysiwyg {{ project.description }}
@@ -58,10 +58,9 @@ export default {
 <style lang="scss">
 .project-wysiwyg {
   h1 {
-    margin: 2rem auto 1.25rem 0;
+    margin: 0 0 1.25rem;
     width: auto;
     padding: 0;
-
     font-weight: 300;
     line-height: 1.4;
     font-family: $body;
@@ -74,37 +73,34 @@ export default {
     }
   }
   blockquote {
-    display: inline-block;
-    margin: 0 1rem 1rem 0;
-    padding: 0.5rem;
-    background: $sky;
+    display: flex;
+    margin: auto -0.25rem 0;
+    padding: 1rem 0 0;
     border: none;
-    font-size: 0.75rem;
-    font-style: normal;
-
-    & + blockquote {
-      background: $red;
-      & + blockquote {
-        background: $purple;
-        & + blockquote {
-          background: $green;
-        }
-      }
-    }
-    &::before,
-    &::after {
-      display: none;
-    }
-    *,
-    *:last-of-type {
-      margin: 0;
-      padding: 0;
-
+		flex-wrap: wrap;
+    p,
+		p:last-of-type {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+      padding: 0.5rem;
+      margin: 0 0.25rem 0.5rem;
       font-size: 0.75rem;
-      border: none;
-      &::before,
-      &::after {
-        display: none;
+      font-style: normal;
+      &:nth-child(6n-5) {
+        background: $sky;
+      }
+      &:nth-child(6n-4) {
+        background: $red;
+      }
+      &:nth-child(6n-3) {
+        background: darken($teal, 10%);
+      }
+      &:nth-child(6n-2) {
+        background: $green;
+      }
+      &:nth-child(6n-1) {
+        background: $purple;
       }
     }
   }
@@ -182,6 +178,8 @@ export default {
 }
 
 .project-content {
+  display: flex;
+  flex-direction: column;
   height: 100%;
   width: 100%;
   overflow-y: hidden;
@@ -230,9 +228,8 @@ export default {
   a {
     opacity: 0;
     &:hover {
-      i {
+      span {
         background: $purple;
-        text-shadow: none;
       }
       &::before {
         opacity: 1;
@@ -250,16 +247,22 @@ export default {
       opacity: 0;
       transition: 0.25s ease;
     }
-    i {
+    span {
       position: absolute;
       bottom: 0;
+      left: 0;
       right: 0;
-      padding: 0.75rem;
-      font-size: 2rem;
-
-      text-shadow: 0 0 10px rgba($black, 0.15);
+      display: block;
+      text-align: center;
+      background: $onyx;
+      padding: 0.3875rem;
+      font-size: 0.875rem;
+      font-weight: 300;
+      text-transform: lowercase;
+      font-family: $headings;
       transition: 0.25s ease;
       pointer-events: none;
+      opacity: 0;
     }
   }
   &::before {
@@ -277,7 +280,6 @@ export default {
   left: 0;
   right: 0;
   font-size: 14px;
-
   padding: 5px;
   pointer-events: none;
   text-transform: uppercase;
@@ -297,10 +299,13 @@ export default {
 }
 
 .project-wysiwyg {
-  margin: 20px;
+  margin: 2rem 1.25rem 1.25rem;
   opacity: 0;
   visibility: hidden;
   will-change: opacity;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
 }
 
 .project.active {
@@ -315,7 +320,7 @@ export default {
   .project-image {
     transform: scale(1, 1);
     filter: none;
-    margin: 20px 20px 10px;
+    margin: 20px 20px 0;
     &::before {
       padding-top: 50%;
     }
@@ -324,7 +329,8 @@ export default {
     }
     a {
       opacity: 1;
-      i {
+      span {
+        opacity: 1;
         pointer-events: all;
       }
     }
