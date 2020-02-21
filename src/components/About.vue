@@ -25,8 +25,15 @@ export default {
   data() {
     return {
       loaded: false,
-      cells: {0:true, 1:true},
-      colorPalette: ["#7b3dba", "#ed4939", "#f87117", "#adc607", "#016FB9", "#f4c10d"],
+      cells: { 0: true, 1: true },
+      colorPalette: [
+        "#7b3dba",
+        "#ed4939",
+        "#f87117",
+        "#adc607",
+        "#016FB9",
+        "#f4c10d"
+      ],
       colorAssignment: []
     };
   },
@@ -45,15 +52,21 @@ export default {
     startInterval(i) {
       setInterval(() => {
         this.cells[i] = !this.cells[i];
-      }, (Math.random() * 12000) + 3500);
+      }, Math.random() * 12000 + 3500);
     }
   },
   created() {
     let i = 0;
     while (i++ < 3) {
       this.colorAssignment.push([
-        ...this.colorPalette.splice(Math.floor(Math.random() * this.colorPalette.length), 1),
-        ...this.colorPalette.splice(Math.floor(Math.random() * this.colorPalette.length), 1)
+        ...this.colorPalette.splice(
+          Math.floor(Math.random() * this.colorPalette.length),
+          1
+        ),
+        ...this.colorPalette.splice(
+          Math.floor(Math.random() * this.colorPalette.length),
+          1
+        )
       ]);
     }
   },
@@ -125,7 +138,10 @@ query {
     content: "() => {";
     top: 0;
     padding: 1.25rem 1.25rem 0.5rem;
-    background: lighten($onyx, 2%);
+
+    @media (min-width: $md) {
+      background: lighten($onyx, 2%);
+    }
   }
   &::after {
     content: "}";
@@ -133,12 +149,20 @@ query {
     bottom: 0;
     text-align: right;
     padding: 1rem 1.25rem 1.25rem;
-    background: linear-gradient(to top, rgba(lighten($onyx, 2%), 1), rgba(lighten($onyx, 2%), 0.85) 50%, rgba(lighten($onyx, 2%), 0.1));
+
+    @media (min-width: $md) {
+      background: linear-gradient(
+        to top,
+        rgba(lighten($onyx, 2%), 1),
+        rgba(lighten($onyx, 2%), 0.85) 50%,
+        rgba(lighten($onyx, 2%), 0.1)
+      );
+    }
   }
 }
 
 .about-content-scroller {
-	padding: 4rem 1.5rem 2rem;
+  padding: 4rem 1.5rem 2rem;
   @media (min-width: $sm) {
     padding: 4rem 3rem 2rem;
   }
@@ -170,7 +194,7 @@ query {
 .about-file {
   position: relative;
   grid-area: f;
-	background: lighten($onyx, 10%);
+  background: lighten($onyx, 10%);
   transition: 0.25s ease;
   &::before {
     display: block;
