@@ -87,19 +87,16 @@ export default {
       margin: 0 0.25rem 0.5rem;
       font-size: 0.75rem;
       font-style: normal;
-      &:nth-child(6n-5) {
+      &:nth-child(4n-3) {
         background: $sky;
       }
-      &:nth-child(6n-4) {
+      &:nth-child(4n-2) {
         background: $red;
       }
-      &:nth-child(6n-3) {
+      &:nth-child(4n-1) {
         background: darken($teal, 10%);
       }
-      &:nth-child(6n-2) {
-        background: $green;
-      }
-      &:nth-child(6n-1) {
+      &:nth-child(4n) {
         background: $purple;
       }
     }
