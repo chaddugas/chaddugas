@@ -1,5 +1,6 @@
 <template lang="pug">
 	section.hero(:class="{'is-hidden': hide}")
+		.hero-scroller(:style="scrollPush") Scroll
 		.hero-inner
 			.hero-bg
 				app-hero-cell(
@@ -30,8 +31,8 @@ export default {
       inactive_cells: [],
       all_cells: [],
       prevPercentScroll: 0,
-      hide: false,
-      interval: null
+			hide: false,
+			scrollPush: null
     };
   },
   computed: {
@@ -43,25 +44,19 @@ export default {
     }
   },
   methods: {
-    preventScroll() {
-      window.scrollBy(
-        0,
-        document.querySelector(".scrollPoint").getBoundingClientRect().top
-      );
-      setTimeout(() => {
-        clearInterval(this.interval);
-      }, 900);
-    },
     flip() {
-      const total = window.innerHeight * 0.75;
-      const percentScroll =
-        window.pageYOffset < total ? window.pageYOffset / total : 1;
+      const total = window.innerHeight * 0.8;
+      const percentScroll = window.pageYOffset < total ? window.pageYOffset / total : 1;
+				
+			const complete = percentScroll === 1 && this.prevPercentScroll === 1;
+			const noChange = percentScroll === this.prevPercentScroll; 
 
-      if (
-        (percentScroll === 1 && this.prevPercentScroll === 1) ||
-        percentScroll === this.prevPercentScroll
-      )
-        return;
+      if (complete || noChange) {
+				if (window.pageYOffset < window.innerHeight * 1.5) {
+					this.scrollPush = `transform: translateY(${(window.pageYOffset - (window.innerHeight*0.8)) / 1.5}px)`
+				}
+				return;
+			}
 
       let from =
         percentScroll > this.prevPercentScroll
@@ -95,7 +90,6 @@ export default {
         !this.hide
       ) {
         this.hide = true;
-        this.interval = setInterval(this.preventScroll, 1);
       } else if (percentScroll < this.prevPercentScroll) {
         this.hide = false;
       }
@@ -103,7 +97,7 @@ export default {
     }
   },
   created() {
-		let active_cells = [1, 2, 3]
+    let active_cells = [1, 2, 3];
     if (process.isClient) {
       active_cells = [...Array(this.total + 1).keys()];
       active_cells.shift();
@@ -116,7 +110,7 @@ export default {
     }
 
     this.active_cells = active_cells.filter((item, i) =>
-      Math.random() >= 0.65 ? false : true
+      Math.random() >= 0.8 ? false : true
     );
     this.all_cells = [...this.active_cells];
   },
@@ -129,49 +123,84 @@ export default {
 
 <style lang="scss" scoped>
 .hero {
-  height: 100vh;
-  width: 100vw;
   z-index: 10;
   margin: 0 0 -50px;
   position: relative;
+  width: 100vw;
+	height: 180vh;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
   &.is-hidden {
     .hero-inner {
-      transform: translateY(-130%) scale(1.3, 1.3);
-    }
-  }
-  &::after {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 3rem;
-    background: linear-gradient(to top, rgba($gray, 1), rgba($gray, 0));
-    content: "";
-    z-index: 9;
+      transform: translateY(-100%);
+		}
+		.hero-scroller {
+			opacity: .8;
+			transition: opacity 0.75s ease;
+		}
   }
 }
 
+@keyframes pulse {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0.35;
+	}
+}
+
+.hero-scroller {
+	color: rgba($white, 0.5);
+	font-size: 0.875rem;
+	text-transform: lowercase;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	margin-bottom: 50vh;
+	transition: opacity 0.5s ease;
+	will-change: transform, opacity;
+	letter-spacing: 1px;
+	&::before,
+	&::after {
+		height: 0.75rem;
+		width: 0.75rem;
+		border-top: 2px solid;
+		border-right: 2px solid;
+		content: '';
+		transform: rotate(-45deg);
+		animation: pulse 1s linear alternate infinite;
+	}
+	&::after {
+		transform: rotate(135deg);
+		animation-delay: 0.35s;
+		animation-duration: 1.3s;
+	}
+}
+
 .hero-inner {
-  background: $onyx;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 500vw;
   width: 100vw;
-  transition: transform 1.5s ease;
-  transform: translateY(0) scale(1, 1);
+	transition: transform 1.5s ease;
+	will-change: transform;
+  transform: translateY(0);
   z-index: 10;
   display: flex;
   flex-direction: column;
+  height: 500vw;
   @media (min-width: $sm) {
     height: 300vw;
-    width: 100vw;
   }
   @media (min-width: $lg) {
     height: 200vw;
-    width: 100vw;
   }
 }
 

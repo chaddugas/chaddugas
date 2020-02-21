@@ -272,7 +272,7 @@ export default {
   background: $white;
   margin: 0;
   opacity: 0;
-  transform: translateY(100%);
+  transform: translateY(110%);
   z-index: 2;
   @supports (mix-blend-mode: screen) {
     mix-blend-mode: screen;

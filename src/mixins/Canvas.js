@@ -1,7 +1,7 @@
 export default {
 	data() {
 		return {
-			c_color: 'rgba(123, 61, 186, 0.1)',
+			c_color: 'rgba(123, 61, 186, 0.3)',
 			c_lineWidth: .2,
 			c_wrapper: null,
 			c_canvas: null,
@@ -25,7 +25,7 @@ export default {
 		c_resize() {
 			this.c_canvas.style.display = 'block'
 			this.c_canvas.width = this.c_wrapper.offsetWidth
-			this.c_canvas.height = this.c_wrapper.offsetHeight * 0.4
+			this.c_canvas.height = this.c_wrapper.offsetHeight
 
 			this.c_ctx.fillStyle = this.c_color
 			this.c_ctx.strokeStyle = this.c_color
@@ -42,7 +42,7 @@ export default {
 			}
 
 			const dots = {
-				total: 250,
+				total: 1000,
 				proximity: 80,
 				radius: 300,
 				array: []

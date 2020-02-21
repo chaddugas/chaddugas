@@ -17,7 +17,7 @@ html {
   width: 100%;
   margin: 0;
   padding: 0;
-  background-color: $onyx;
+  background: $onyx;
 }
 
 body {
@@ -29,7 +29,7 @@ body {
   font-weight: $b_weight;
   font-size: $b_size;
   line-height: 1.4;
-  background-color: $gray;
+  background: $gray;
   color: $onyx;
   position: relative;
 }
@@ -38,7 +38,7 @@ main {
   z-index: 1;
   overflow-x: hidden;
   min-height: 100vh;
-	background: $gray;
+	background: $onyx;
 }
 
 section {
