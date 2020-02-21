@@ -2,7 +2,8 @@
 export default {
 	data() {
 		return {
-      media: null,
+			media: null,
+			isTouchDevice: false,
       mediaSm: process.isClient
         ? window.matchMedia("(min-width: 650px)")
         : null,
@@ -30,6 +31,12 @@ export default {
 	},
 	created() {
     if (process.isClient) this.checkMedia();
+    if (process.isClient) {
+			try {
+				document.createEvent("TouchEvent");
+				this.isTouchDevice = true
+			} catch { this.isTouchDevice = false }
+		}
 	},
   mounted() {
     if (process.isClient) this.mediaXl.addListener(this.checkMedia);

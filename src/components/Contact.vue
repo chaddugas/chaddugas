@@ -71,10 +71,16 @@ query {
 
 <style lang="scss">
 .contact-wysiwyg {
+	h1 {
+		font-size: 1.75rem !important;
+	}
   * {
-    color: $white !important;
+		font-family: $headings !important;
+		font-weight: 400 !important;
+		color: $white !important;
+		margin-bottom: 1rem !important;
     &:last-child {
-      margin-bottom: 0;
+      margin-bottom: 0 !important;
     }
   }
 }
@@ -92,7 +98,8 @@ query {
 }
 
 .contact-content {
-  background: $teal;
+	display: flex;
+  background: lighten($onyx, 2%);
   align-self: stretch;
   position: relative;
   margin-bottom: 20px;
@@ -109,8 +116,11 @@ query {
 .contact-wysiwyg {
   width: 100%;
   pointer-events: none;
-  padding: 25px;
-  color: $white;
+  padding: 1rem 2.5rem;
+	color: $white;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .contact-wysiwyg {
@@ -132,10 +142,10 @@ query {
 }
 
 .contact-infoName {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 1.75rem;
+  font-weight: 400;
   font-family: $headings;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
 .contact-items {
@@ -152,8 +162,8 @@ query {
 .contact-item {
   flex: 0 0 calc(50% - 20px);
   width: calc(50% - 20px);
-  margin: 0 10px 20px;
-  background: $white;
+	margin: 0 10px 20px;
+	background: lighten($onyx, 2%);
   transition: 0.25s ease;
   cursor: pointer;
   position: relative;
@@ -173,12 +183,9 @@ query {
     right: 0;
     bottom: 100%;
     z-index: -1;
-    content: "";
+		content: "";
+		background: currentColor;
     transition: 0.25s ease;
-  }
-  &:hover::after {
-    right: 0;
-    bottom: 0;
   }
   @media (min-width: $lg) {
     flex: 0 0 calc(25% - 20px);
@@ -186,61 +193,26 @@ query {
     padding: 20px;
   }
   &:nth-child(4n-3) {
-    .contact-logo {
-      color: $purple;
-    }
-    &:hover {
-      &::after {
-        background: $purple;
-      }
-      .contact-name,
-      .contact-logo {
-        color: $white;
-      }
-    }
+		color: $purple;
   }
   &:nth-child(4n-2) {
-    .contact-logo {
-      color: $onyx;
-    }
-    &:hover {
-      &::after {
-        background: $onyx;
-      }
-      .contact-name,
-      .contact-logo {
-        color: $white;
-      }
-    }
+		color: $orange;
   }
   &:nth-child(4n-1) {
-    .contact-logo {
-      color: $sky;
-    }
-    &:hover {
-      &::after {
-        background: $sky;
-      }
-      .contact-name,
-      .contact-logo {
-        color: $white;
-      }
-    }
+		color: $sky;
   }
   &:nth-child(4n) {
-    .contact-logo {
-      color: $red;
-    }
-    &:hover {
-      &::after {
-        background: $red;
-      }
-      .contact-name,
-      .contact-logo {
-        color: $white;
-      }
-    }
+		color: $red;
   }
+	&:hover {
+		&::after {
+			right: 0;
+			bottom: 0;
+		}
+		.contact-logo {
+			color: $white;
+		}
+	}
 }
 
 .contact-inner {
@@ -251,7 +223,8 @@ query {
   left: 0;
   right: 0;
   bottom: 0;
-  display: flex;
+	display: flex;
+	color: inherit;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -277,7 +250,7 @@ query {
   font-weight: 700;
   text-align: center;
   font-size: 0.75rem;
-  color: $onyx;
+  color: $white;
   transition: 0.25s ease;
   width: 100%;
   @media (min-width: $md) {

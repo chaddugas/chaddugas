@@ -21,9 +21,9 @@ export default {
   props: ["project"],
   data() {
     return {
-			active: false,
-			opening: false,
-			closing: false 
+      active: false,
+      opening: false,
+      closing: false
     };
   },
   methods: {
@@ -34,22 +34,21 @@ export default {
     },
     close() {
       this.active = false;
-		},
-		transitionend(e) {
-			this.opening = false
-			this.closing = false
-		}
-	},
-	watch: {
-		active(to, from) {
-			if (to) {
-				this.opening = true
-			}
-			else {
-				this.closing = true
-			}
-		}
-	},
+    },
+    transitionend(e) {
+      this.opening = false;
+      this.closing = false;
+    }
+  },
+  watch: {
+    active(to, from) {
+      if (to) {
+        this.opening = true;
+      } else {
+        this.closing = true;
+      }
+    }
+  },
   mounted() {
     ProjectBus.$on("toggled", el => (this.$el != el ? this.close() : false));
   }
@@ -59,54 +58,53 @@ export default {
 <style lang="scss">
 .project-wysiwyg {
   h1 {
-    margin: 0 0 2rem !important;
-    padding: 1rem !important;
-    background: $teal !important;
-    color: $white !important;
-    font-weight: 300 !important;
-    line-height: 1.4 !important;
-    font-family: $body !important;
-    font-size: 2rem !important;
-    text-align: center !important;
+    margin: 2rem auto 1.25rem 0;
+    width: auto;
+    padding: 0;
+
+    font-weight: 300;
+    line-height: 1.4;
+    font-family: $body;
+    font-size: 2rem;
   }
   p {
-    margin: 0 0 1rem !important;
+    margin: 0 0 1rem;
     &:last-of-type {
-      margin-bottom: 2rem !important;
+      margin-bottom: 2rem;
     }
   }
   blockquote {
-    display: inline-block !important;
-    margin: 0 1rem 1rem 0 !important;
-    padding: 0.5rem !important;
-    background: $sky !important;
-    border: none !important;
-    font-size: 0.75rem !important;
-    font-style: normal !important;
-    color: $white !important;
+    display: inline-block;
+    margin: 0 1rem 1rem 0;
+    padding: 0.5rem;
+    background: $sky;
+    border: none;
+    font-size: 0.75rem;
+    font-style: normal;
+
     & + blockquote {
-      background: $red !important;
+      background: $red;
       & + blockquote {
-        background: $purple !important;
+        background: $purple;
         & + blockquote {
-          background: $green !important;
+          background: $green;
         }
       }
     }
     &::before,
     &::after {
-      display: none !important;
+      display: none;
     }
     *,
     *:last-of-type {
-      margin: 0 !important;
-      padding: 0 !important;
-      color: $white !important;
-      font-size: 0.75rem !important;
-      border: none !important;
+      margin: 0;
+      padding: 0;
+
+      font-size: 0.75rem;
+      border: none;
       &::before,
       &::after {
-        display: none !important;
+        display: none;
       }
     }
   }
@@ -120,16 +118,22 @@ export default {
   flex: 0 0 calc(50% - 20px);
   width: calc(50% - 20px);
   margin: 0 10px 20px;
-	background-size: 0 0;
-	&.active {
-		z-index: 2;
-	}
-	&.is-closing {
-		z-index: 1;
-	}
-	&.is-opening {
-		z-index: 3;
-	}
+  background-size: 0 0;
+  &.active {
+    z-index: 2;
+  }
+  &.is-closing {
+    z-index: 1;
+  }
+  &.is-opening {
+    z-index: 3;
+  }
+  &.is-opening,
+  &.is-closing {
+    .project-image {
+      transition-duration: 250ms;
+    }
+  }
   &:before {
     content: "";
     display: block;
@@ -154,19 +158,24 @@ export default {
   right: 0;
   bottom: 0;
   z-index: 1;
-  @supports (mix-blend-mode: screen) {
-    transition: 500ms ease;
-    will-change: height, width, top, left;
-    @media (hover: hover) {
-      &:hover {
-        .project-name {
-          opacity: 1;
-          transform: translateY(0);
+  transition: 500ms ease;
+  will-change: height, width, top, left;
+  @media (hover: hover) {
+    &:hover {
+      .is-opening &,
+      .is-closing & {
+        &:hover {
+          .project-name {
+            opacity: 0;
+          }
         }
-        .project-image {
-          transform: scale(1.15, 1.15);
-          filter: grayscale(0%) brightness(60%);
-        }
+      }
+      .project-name {
+        opacity: 1;
+      }
+      .project-image {
+        transform: scale(1.075, 1.075);
+        filter: grayscale(0%) brightness(90%);
       }
     }
   }
@@ -178,7 +187,7 @@ export default {
   overflow-y: hidden;
   overflow-x: hidden;
   pointer-events: none;
-  background-color: $white;
+  background-color: lighten($onyx, 10%);
   transform: scale(1, 1);
   position: relative;
   @supports (mix-blend-mode: screen) {
@@ -202,7 +211,8 @@ export default {
   transform: scale(1, 1);
   z-index: 1;
   @supports (mix-blend-mode: screen) {
-    transition: 500ms ease;
+    filter: grayscale(30%) brightness(70%);
+    transition: 2000ms ease;
     will-change: transform, filter;
   }
   img,
@@ -221,7 +231,8 @@ export default {
     opacity: 0;
     &:hover {
       i {
-        color: $yellow;
+        background: $purple;
+        text-shadow: none;
       }
       &::before {
         opacity: 1;
@@ -241,13 +252,14 @@ export default {
     }
     i {
       position: absolute;
-      bottom: 1rem;
-      right: 1rem;
-      font-size: 2.5rem;
-      color: $white;
-      text-shadow: 0 0 10px rgba($black, 0.25);
+      bottom: 0;
+      right: 0;
+      padding: 0.75rem;
+      font-size: 2rem;
+
+      text-shadow: 0 0 10px rgba($black, 0.15);
       transition: 0.25s ease;
-			pointer-events: none;
+      pointer-events: none;
     }
   }
   &::before {
@@ -261,24 +273,20 @@ export default {
 
 .project-name {
   position: absolute;
-  bottom: 0;
+  top: 50%;
   left: 0;
   right: 0;
   font-size: 14px;
-  color: $black;
+
   padding: 5px;
   pointer-events: none;
   text-transform: uppercase;
-  background: $white;
+  background: lighten($onyx, 5%);
   margin: 0;
   opacity: 0;
-  transform: translateY(110%);
   z-index: 2;
-  @supports (mix-blend-mode: screen) {
-    mix-blend-mode: screen;
-    transition: 500ms ease;
-    will-change: opacity transform;
-  }
+  transform: translateY(-50%);
+  transition: 250ms ease;
   @media (min-width: $xs) {
     font-size: 16px;
   }
@@ -315,10 +323,10 @@ export default {
       opacity: 0;
     }
     a {
-			opacity: 1;
-			i {
-				pointer-events: all;
-			}
+      opacity: 1;
+      i {
+        pointer-events: all;
+      }
     }
   }
   .project-name {
@@ -328,7 +336,7 @@ export default {
     opacity: 1;
     visibility: visible;
     @supports (mix-blend-mode: screen) {
-      transition: 250ms 700ms ease;
+      transition: 250ms 500ms ease;
     }
   }
   &:nth-child(2) {

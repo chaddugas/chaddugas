@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       loaded: false,
-      cells: {0:true, 1:true, 2:true},
+      cells: {0:true, 1:true},
       colorPalette: ["#7b3dba", "#ed4939", "#f87117", "#adc607", "#016FB9", "#f4c10d"],
       colorAssignment: []
     };
@@ -88,14 +88,14 @@ query {
   grid-template-rows: auto 1fr 1fr;
   grid-template-areas:
     "c c"
-    "p f"
-    "s r";
+    "c_1 f"
+    "c_2 c_3";
   @media (min-width: $md) {
     grid-template-columns: 1fr 1fr 2fr;
     grid-template-rows: 1fr 1fr;
     grid-template-areas:
-      "p f c c"
-      "r s c c";
+      "c_1 f c c"
+      "c_3 c_2 c c";
   }
   &.loaded {
     .about-block {
@@ -106,7 +106,7 @@ query {
 
 .about-content {
   grid-area: c;
-  background: $white;
+  background: lighten($onyx, 2%);
   position: relative;
   overflow: hidden;
   &::before,
@@ -114,7 +114,7 @@ query {
     position: absolute;
     font-size: 1.5rem;
     font-weight: 700;
-    color: darken($gray, 5%);
+    color: lighten($onyx, 18%);
     font-family: $headings;
     left: 0;
     right: 0;
@@ -125,20 +125,20 @@ query {
     content: "() => {";
     top: 0;
     padding: 1.25rem 1.25rem 0.5rem;
-    background: $white;
+    background: lighten($onyx, 2%);
   }
   &::after {
     content: "}";
     font-family: $headings;
     bottom: 0;
     text-align: right;
-    padding: 0.5rem 1.25rem 1.25rem;
-    background: linear-gradient(to top, rgba($white, 1), rgba($white, 0.25));
+    padding: 1rem 1.25rem 1.25rem;
+    background: linear-gradient(to top, rgba(lighten($onyx, 2%), 1), rgba(lighten($onyx, 2%), 0.85) 50%, rgba(lighten($onyx, 2%), 0.1));
   }
 }
 
 .about-content-scroller {
-  padding: 4rem 1.5rem 2rem;
+	padding: 4rem 1.5rem 2rem;
   @media (min-width: $sm) {
     padding: 4rem 3rem 2rem;
   }
@@ -170,7 +170,7 @@ query {
 .about-file {
   position: relative;
   grid-area: f;
-  color: $white;
+	background: lighten($onyx, 10%);
   transition: 0.25s ease;
   &::before {
     display: block;
@@ -209,13 +209,13 @@ query {
   transition: opacity 0.5s ease;
   perspective: 1000px;
   &:nth-of-type(1) {
-    grid-area: p;
+    grid-area: c_1;
   }
   &:nth-of-type(2) {
-    grid-area: r;
+    grid-area: c_2;
   }
   &:nth-of-type(3) {
-    grid-area: s;
+    grid-area: c_3;
   }
 }
 

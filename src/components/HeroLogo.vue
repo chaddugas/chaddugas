@@ -51,7 +51,7 @@ export default {
   padding: 1.25rem;
   transition: opacity 0.4s 0.4s ease;
   text-align: right;
-  color: $white;
+  // color: $white;
   @media (min-width: $md) {
     padding: 3rem;
   }
@@ -59,20 +59,20 @@ export default {
 
 @keyframes blink {
   0% {
-    background: $white;
+    background: darken($white, 15%);
     color: $purple;
   }
   45% {
-    background: $white;
+    background: darken($white, 15%);
     color: $purple;
   }
   55% {
     background: transparent;
-    color: $white;
+    color: darken($white, 15%);
   }
   100% {
     background: transparent;
-    color: $white;
+    color: darken($white, 15%);
   }
 }
 
@@ -84,7 +84,8 @@ export default {
   white-space: nowrap;
   color: $white;
   line-height: 1;
-  text-transform: uppercase;
+	text-transform: uppercase;
+	margin-top: auto;
   margin-bottom: 0.5rem;
   @media (min-width: $sm) {
     margin-bottom: 1rem;
@@ -94,7 +95,8 @@ export default {
 .logo-title {
   @include fluid-type(600px, 1450px, 18px, 28px);
   text-transform: lowercase;
-  margin-bottom: 1rem;
+	margin-bottom: 1rem;
+	color: darken($white, 15%);
   @media (min-width: $sm) {
     margin-bottom: 2rem;
   }
@@ -103,25 +105,27 @@ export default {
       margin-right: 1rem;
     }
     &:last-child {
-      background: $white;
+      background: darken($white, 15%);
       animation: blink 0.75s alternate infinite;
     }
   }
 }
 
 .logo-icons {
-  @include fluid-type(600px, 1450px, 20px, 36px);
+  @include fluid-type(400px, 2000px, 22px, 60px);
   display: flex;
+  color: darken($purple, 30%);
   justify-content: flex-end;
   align-items: flex-start;
-  margin: 0 -0.25rem;
+	margin: 0 -0.5rem;
+	opacity: 0.3;
   i {
-    margin: 0 0.25rem;
+    margin: 0 0.5rem;
   }
   @media (min-width: $sm) {
-    margin: 0 -0.5rem;
+    margin: 0 -0.75rem;
     i {
-      margin: 0 0.5rem;
+      margin: 0 0.75rem;
     }
   }
 }

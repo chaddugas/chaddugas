@@ -69,7 +69,7 @@ query {
   flex: 0 0 calc(50% - 20px);
   width: calc(50% - 20px);
   margin: 0 10px 20px;
-  background: $red;
+  background: lighten($onyx,2%);
   transition: none;
   transition-delay: 0;
   @media (min-width: $xs) {
@@ -90,8 +90,7 @@ query {
     padding: 20px;
     height: 100%;
     width: 100%;
-    text-align: right;
-    color: $white;
+		text-align: right;
     top: 0;
     left: 0;
     right: 0;
