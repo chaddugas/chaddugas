@@ -25,19 +25,19 @@
       "visible": true
     },
     {
-      "title": "RILA RCC",
-      "photo": "/media/rcc_sm.png",
-      "secondary_photo": "/media/rcc_lg.png",
-      "description": "# RILA Retail Compliance Center Matrix&nbsp;Application\n\nThis was an implementation of a new Matrix (filterable table) application for RCC. Their previous implementation was too visually busy, and difficult for the client to mange. The new application is built entirely in Vue.JS. The public facing view of this application is not too exciting, however as a content editor there is an admin-only view. Accessed through their CMS, once authenticated the content editor can add, remove, and drag and drop rows. The rows can also be edited via a modal popup editor. The editor is generated from a table schema JSON source (accessed from an API) that defines data types. This schema also defines the view of each data type. Rather than storing markup in the database for each cell, the application takes the data JSON, and builds out the view by referencing the schema. \n\n\n> Vue.JS\n\n> API Generated Views\n\n> Front-end Lead\n\n> Back-end Integration",
-      "link": "https://www.rila.org/retail-compliance-center/hazardous-waste-generator-reporting",
-      "visible": true
-    },
-    {
       "title": "UHCU",
       "photo": "/media/uhcu_sm.png",
       "secondary_photo": "/media/uhcu_lg.png",
       "description": "# United Heritage Credit Union\n\nRedesign and reimplementation of the UHCU website. This build included several complex Vanilla JS components (such as a loan calculator) as well as the integration of a few high priority Vue.JS Applications (a lead generator, and a dynamic form builder). \n\nUHCU was ambitious with their goals for this site, hoping to get a sleek, modern, with lots of subtle and not so subtle animations and interactions. The goal was to have everything feel well intentioned and smooth, without being over the top.\n\n> Vanilla JS\n\n> Vue.JS\n\n> Front-end Lead\n\n> In-browser Design",
       "link": "https://www.uhcu.org/",
+      "visible": true
+    },
+    {
+      "title": "RILA RCC",
+      "photo": "/media/rcc_sm.png",
+      "secondary_photo": "/media/rcc_lg.png",
+      "description": "# RILA Retail Compliance Center Matrix&nbsp;Application\n\nThis was an implementation of a new Matrix (filterable table) application for RCC. Their previous implementation was too visually busy, and difficult for the client to mange. The new application is built entirely in Vue.JS. The public facing view of this application is not too exciting, however as a content editor there is an admin-only view. Accessed through their CMS, once authenticated the content editor can add, remove, and drag and drop rows. The rows can also be edited via a modal popup editor. The editor is generated from a table schema JSON source (accessed from an API) that defines data types. This schema also defines the view of each data type. Rather than storing markup in the database for each cell, the application takes the data JSON, and builds out the view by referencing the schema. \n\n\n> Vue.JS\n\n> API Generated Views\n\n> Front-end Lead\n\n> Back-end Integration",
+      "link": "https://www.rila.org/retail-compliance-center/hazardous-waste-generator-reporting",
       "visible": true
     }
   ]
