@@ -1,6 +1,6 @@
 <template lang='pug'>
 	.hero-cell(:class="{flipped}")
-		.cell-flipper(:style="{transitionDelay}", v-if="active")
+		.cell-flipper(v-if="active")
 			.cell-face.cell-face--front
 				.cell-fill(:style="style")
 			.cell-face.cell-face--back
@@ -24,12 +24,6 @@ export default {
 			if (!this.active) return false
       return !this.active_cells.includes(this.item);
     },
-    transitionDelay() {
-      if (this.active_cells.indexOf(this.item)) {
-        return `${this.active_cells.indexOf(this.item) * 0.05 * 1000}ms`;
-      }
-      return "0ms";
-    }
   },
   created() {
     this.style = {

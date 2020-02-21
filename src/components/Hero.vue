@@ -1,7 +1,7 @@
 <template lang="pug">
 	section.hero(:class="{'is-hidden': hide}")
 		.hero-scroller(:style="scrollPush") Scroll
-		.hero-inner
+		.hero-inner(@transitionend.self="reset")
 			.hero-bg
 				app-hero-cell(
 					v-for="item in total",
@@ -115,13 +115,21 @@ export default {
         Math.random() >= 0.8 ? false : true
       );
       this.all_cells = [...this.active_cells];
+    },
+    reset(e) {
+			if (e.propertyName === 'z-index') {
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth'
+				})
+			}
     }
   },
   created() {
     this.initCells();
     if (process.isClient) this.flip();
     if (process.isClient) window.addEventListener("scroll", this.flip);
-	}
+  }
 };
 </script>
 
@@ -138,6 +146,8 @@ export default {
   &.is-hidden {
     .hero-inner {
       transform: translateY(-100%);
+      z-index: 11;
+      transition: transform 1.5s ease;
     }
     .hero-scroller {
       opacity: 0.8;
@@ -193,7 +203,7 @@ export default {
   right: 0;
   bottom: 0;
   width: 100vw;
-  transition: transform 1.5s ease;
+  transition: transform 1.5s ease, z-index 1.2s ease;
   will-change: transform;
   transform: translateY(0);
   z-index: 10;
