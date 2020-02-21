@@ -1,6 +1,6 @@
 <template lang="pug">
 	Layout
-		main
+		main(@click="closeAll")
 			app-hero
 			.scrollPoint
 			app-projects
@@ -13,6 +13,8 @@ import Hero from "@/components/Hero"
 import About from "@/components/About"
 import Projects from "@/components/Projects"
 import Contact from "@/components/Contact"
+
+import { ProjectBus } from "@/EventBus.js";
 export default {
 	name: "Home",
   components: {
@@ -20,7 +22,12 @@ export default {
     appAbout: About,
     appProjects: Projects,
     appContact: Contact,
-  }
+	},
+	methods: {
+		closeAll() {
+      ProjectBus.$emit("toggled", this.$el);
+		}
+	}
 };
 </script>
 

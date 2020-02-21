@@ -1,13 +1,13 @@
 <template lang="pug">
-	.project(:class="{active}", :style="`background-image: url(${project.photo})`", @click.self="close")
-		.project-inner(@click="toggle")
+	.project(:class="{active, 'is-opening': opening, 'is-closing': closing}", :style="`background-image: url(${project.photo})`", @click="close")
+		.project-inner(@click.stop="toggle", @transitionend.self="transitionend")
 			.project-content
 				.project-data
 					.project-image
 						img(:src="project.photo")
 						a(:href="project.link", target="_blank", @click.stop="")
-							i.fas.fa-external-link-alt
 							img(:src="project.secondary_photo || project.photo")
+							i.fas.fa-external-link-alt
 					.project-name
 						h3 {{ project.title }}
 				Markdown.project-wysiwyg {{ project.description }}
@@ -21,7 +21,9 @@ export default {
   props: ["project"],
   data() {
     return {
-      active: false
+			active: false,
+			opening: false,
+			closing: false 
     };
   },
   methods: {
@@ -32,8 +34,22 @@ export default {
     },
     close() {
       this.active = false;
-    }
-  },
+		},
+		transitionend(e) {
+			this.opening = false
+			this.closing = false
+		}
+	},
+	watch: {
+		active(to, from) {
+			if (to) {
+				this.opening = true
+			}
+			else {
+				this.closing = true
+			}
+		}
+	},
   mounted() {
     ProjectBus.$on("toggled", el => (this.$el != el ? this.close() : false));
   }
@@ -104,9 +120,16 @@ export default {
   flex: 0 0 calc(50% - 20px);
   width: calc(50% - 20px);
   margin: 0 10px 20px;
-  transition: z-index 0ms linear;
-  transition-delay: 500ms;
-  background-size: 0 0;
+	background-size: 0 0;
+	&.active {
+		z-index: 2;
+	}
+	&.is-closing {
+		z-index: 1;
+	}
+	&.is-opening {
+		z-index: 3;
+	}
   &:before {
     content: "";
     display: block;
@@ -204,13 +227,12 @@ export default {
         opacity: 1;
       }
     }
-    &::before {
+    &::after {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      z-index: 2;
       pointer-events: none;
       content: "";
       background: rgba($black, 0.25);
@@ -225,7 +247,6 @@ export default {
       color: $white;
       text-shadow: 0 0 10px rgba($black, 0.25);
       transition: 0.25s ease;
-      z-index: 3;
 			pointer-events: none;
     }
   }
@@ -275,8 +296,6 @@ export default {
 }
 
 .project.active {
-  z-index: 2;
-  transition-delay: 0ms;
   .project-inner {
     height: calc(200% + 20px);
     width: calc(200% + 20px);
