@@ -5,6 +5,10 @@
 				.about-content-scroller
 					h3 {{title}}
 					Markdown.project-wysiwyg {{ content }}
+			a.about-file(:href="file", target="_blank")
+				.about-file-inner
+					i.fas.fa-check-double
+					span My Resume
 			span.about-block(
 				v-for="color in Object.keys(colors)", 
 				:class="`about-block--${color}`",
@@ -31,6 +35,9 @@ export default {
     },
     content() {
       return this.$static.about.edges[0].node.content;
+    },
+    file() {
+      return this.$static.about.edges[0].node.file;
     }
 	},
   methods: {
@@ -54,7 +61,8 @@ query {
     edges {
       node {
 				title
-				content
+				content,
+				file
       }
     }
   }
@@ -70,13 +78,13 @@ query {
   grid-template-rows: auto 1fr 1fr;
   grid-template-areas:
     "c c"
-    "p r"
-    "s .";
+    "p f"
+    "s r";
   @media (min-width: $md) {
     grid-template-columns: 1fr 1fr 2fr;
     grid-template-rows: 1fr 1fr;
     grid-template-areas:
-      "p . c c"
+      "p f c c"
       "r s c c";
   }
   &.loaded {
@@ -144,6 +152,43 @@ query {
 		line-height: 1.6;
     margin: 0 0 1rem;
   }
+}
+
+.about-file {
+  position: relative;
+	grid-area: f;
+	background: $onyx;
+	color: $white;
+	transition: 0.25s ease;
+  &::before {
+    display: block;
+    content: "";
+		padding-top: 100%;
+		pointer-events: none;
+	}
+	&:hover {
+		color: $yellow;
+	}
+}
+
+.about-file-inner {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	i {
+		margin-bottom: 1.25rem;
+		font-size: 3.25rem;
+	}
+	span {
+		font-size: 1.25;
+	}
 }
 
 .about-block {

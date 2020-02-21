@@ -58,3 +58,4 @@ collections:
         fields:
           - {label: 'Title', name: 'title', widget: 'string'}
           - {label: 'Content', name: 'content', widget: 'markdown'}
+          - {label: 'Resume', name: 'file', widget: 'file'}
