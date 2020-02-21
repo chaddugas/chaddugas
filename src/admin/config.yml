@@ -8,7 +8,7 @@ backend:
 site_url: https://chaddugas.me
 display_url: https://chaddugas.me
 
-logo_url: /media/logo.svg
+logo_url: /media/logo/logo.svg
 
 show_preview_links: true
 
