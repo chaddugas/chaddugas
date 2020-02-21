@@ -36,6 +36,14 @@ collections:
               - {label: 'Link', name: 'link', widget: 'string'}
               - {label: 'Visible', name: 'visible', widget: 'boolean', default: true}
 
+      - name: 'about'
+        label: 'About' 
+        file: 'static/data/about.json'
+        fields:
+          - {label: 'Title', name: 'title', widget: 'string'}
+          - {label: 'Content', name: 'content', widget: 'markdown'}
+          - {label: 'Resume', name: 'file', widget: 'file'}
+
       - name: 'contact'
         label: 'Contacts' 
         file: 'static/data/contact.json'
@@ -51,11 +59,3 @@ collections:
               - {label: 'Logo', name: 'logo', widget: 'string'}
               - {label: 'Information', name: 'info', widget: 'text'}
               - {label: 'Link', name: 'link', widget: 'string'}
-
-      - name: 'about'
-        label: 'About' 
-        file: 'static/data/about.json'
-        fields:
-          - {label: 'Title', name: 'title', widget: 'string'}
-          - {label: 'Content', name: 'content', widget: 'markdown'}
-          - {label: 'Resume', name: 'file', widget: 'file'}
