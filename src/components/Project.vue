@@ -1,5 +1,5 @@
 <template lang="pug">
-	.project(:class="{active, 'is-opening': opening, 'is-closing': closing}", :style="`background-image: url(${project.photo})`", @click="close")
+	.project(:class="{active, 'is-opening': opening, 'is-closing': closing, 'is-loaded': loaded}", :style="`background-image: url(${project.photo})`", @click="close")
 		.project-inner(@click.stop="toggle", @transitionend.self="transitionend")
 			.project-content
 				.project-data
@@ -18,7 +18,7 @@
 import { ProjectBus } from "@/EventBus.js";
 export default {
   name: "Project",
-  props: ["project"],
+  props: ["project", "loaded"],
   data() {
     return {
       active: false,
@@ -77,24 +77,26 @@ export default {
     margin: auto -0.25rem 0;
     padding: 1rem 0 0;
     border: none;
-		flex-wrap: wrap;
+    flex-wrap: wrap;
     p {
-			display: flex;
-			justify-content: center;
-			align-items: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       padding: 0.5rem;
       margin: 0 0.25rem 0.5rem;
       font-size: 0.75rem;
-			font-style: normal;
-			@each $color in $palette {
-				&:nth-child(#{length($palette)}n-#{length($palette) - index($palette, $color)}) {
-					background: $color;
-					color: choose-contrast-color($color);
-				}
-			}
-			&:last-of-type {
-				margin: 0 0.25rem 0.5rem;
-			}
+      font-style: normal;
+      @each $color in $palette {
+        &:nth-child(#{length($palette)}n-#{length($palette)
+            -
+            index($palette, $color)}) {
+          background: $color;
+          color: choose-contrast-color($color);
+        }
+      }
+      &:last-of-type {
+        margin: 0 0.25rem 0.5rem;
+      }
     }
   }
 }
@@ -108,6 +110,20 @@ export default {
   width: calc(50% - 20px);
   margin: 0 10px 20px;
   background-size: 0 0;
+  opacity: 0;
+  transform: rotateY(-180deg);
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  &.is-loaded {
+    opacity: 1;
+    transform: rotateY(0deg);
+  }
+  @for $i from 0 through 20 {
+    &:nth-child(#{$i}) {
+      transition: opacity 375ms #{375ms + ($i * 150ms)} ease,
+        transform 750ms #{$i * 150ms} ease;
+    }
+  }
   &.active {
     z-index: 2;
   }
@@ -164,7 +180,7 @@ export default {
       }
       .project-image {
         transform: scale(1.075, 1.075);
-        filter: grayscale(0%) brightness(90%);
+        opacity: 0.075;
       }
     }
   }
@@ -201,11 +217,8 @@ export default {
   position: relative;
   transform: scale(1, 1);
   z-index: 1;
-  @supports (mix-blend-mode: screen) {
-    filter: grayscale(30%) brightness(70%);
-    transition: 2000ms ease;
-    will-change: transform, filter;
-  }
+  transition: 700ms ease;
+  will-change: transform, opacity;
   img,
   a {
     transition: 250ms ease;
@@ -222,7 +235,8 @@ export default {
     opacity: 0;
     &:hover {
       span {
-        background: $slate;
+        background: $red;
+        color: choose-contrast-color($red);
       }
       &::before {
         opacity: 1;
@@ -312,7 +326,7 @@ export default {
   }
   .project-image {
     transform: scale(1, 1);
-    filter: none;
+    opacity: 1;
     margin: 20px 20px 0;
     &::before {
       padding-top: 50%;

@@ -9,6 +9,7 @@
 			app-project(
 				v-for="(project, i) in projects", 
 				:key="i", 
+				:loaded="loaded",
 				:project="project")
 </template>
 
@@ -20,12 +21,32 @@ export default {
   components: {
     appProject: Project
   },
+  data() {
+    return {
+      loaded: false
+    };
+  },
   computed: {
     projects() {
       let projects = this.$static.projects.edges[0].node.projects;
       projects = projects.filter(project => project.visible);
       return projects;
     }
+  },
+  methods: {
+    checkScroll() {
+      const height = window.innerHeight;
+      const top = this.$el.getBoundingClientRect().top;
+
+      if (top < height * 0.6666) this.loaded = true;
+    }
+  },
+  mounted() {
+    this.checkScroll();
+    window.addEventListener("scroll", this.checkScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.checkScroll);
   }
 };
 </script>
@@ -61,6 +82,8 @@ query {
   margin: 0 -20px -20px;
   position: relative;
   z-index: 3;
+  transform-style: preserve-3d;
+  perspective: 1000px;
 }
 
 .projects-title {
@@ -69,7 +92,7 @@ query {
   flex: 0 0 calc(50% - 20px);
   width: calc(50% - 20px);
   margin: 0 10px 20px;
-  background: lighten($onyx,2%);
+  background: lighten($onyx, 2%);
   transition: none;
   transition-delay: 0;
   @media (min-width: $xs) {
@@ -90,7 +113,7 @@ query {
     padding: 20px;
     height: 100%;
     width: 100%;
-		text-align: right;
+    text-align: right;
     top: 0;
     left: 0;
     right: 0;

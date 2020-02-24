@@ -102,10 +102,10 @@ export default {
 
       cells = cells.filter((item, i) => (Math.random() >= 0.8 ? false : true));
 			this.all = [...cells];
+			this.active = [...this.all]
       setTimeout(() => {
-				this.loaded = true;
-				this.active = [...this.all]
-				this.flip();
+			this.flip();
+			this.loaded = true;
 			}, 500);
     }
   },

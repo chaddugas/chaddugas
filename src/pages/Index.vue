@@ -2,7 +2,6 @@
 	Layout
 		main(@click="closeAll")
 			app-hero
-			.scrollPoint
 			app-projects
 			app-about
 			app-contact
@@ -32,9 +31,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-.scrollPoint {
-	scroll-snap-align: start;
-	scroll-snap-stop: always;
-}
 </style>
