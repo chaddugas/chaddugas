@@ -1,23 +1,4 @@
-@mixin parallax($para: 300px) {
-	--parallax: #{$para};
-	.para-container {
-		position: relative;
-		overflow: hidden;
-		min-height: 200px;
-	}
-	.para-image {
-		position: absolute;
-		top: calc(var(--parallax) * -1);
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background-size: cover;
-		height: calc(100% + var(--parallax));
-		background-position: 50% 100%;
-	}
-}
-
-@mixin container($max: 1400px, $margin: 30px) {
+@mixin container($max: 1600px, $margin: 30px) {
 	@content;
 	max-width: $max;
 	margin-right: $margin;

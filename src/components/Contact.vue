@@ -88,7 +88,7 @@ query {
 
 <style lang="scss" scoped>
 .contact {
-  @include container($max: 1200px);
+  @include container;
   display: flex;
   align-items: flex-start;
   flex-direction: column;

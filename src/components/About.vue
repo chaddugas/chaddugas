@@ -87,7 +87,7 @@ query {
 
 <style lang="scss">
 .about-inner {
-  @include container($max: 1200px);
+  @include container;
   display: grid;
   grid-gap: 20px;
   grid-template-columns: 1fr 1fr;
