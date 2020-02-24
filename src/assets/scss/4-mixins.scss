@@ -1,4 +1,4 @@
-@mixin container($max: 1600px, $margin: 30px) {
+@mixin container($max: 1450px, $margin: 30px) {
 	@content;
 	max-width: $max;
 	margin-right: $margin;

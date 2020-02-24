@@ -72,7 +72,7 @@ query {
 
 <style lang="scss" scoped>
 .projects {
-  @include container($max: 1580px);
+  @include container($max: 1430px);
 }
 
 .projects-inner {
