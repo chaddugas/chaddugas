@@ -12,7 +12,7 @@ export default {
   props: ["item", "active", "all", "hidden"],
   data() {
     return {
-      colors: JSON.parse(getComputedStyle(document.body).getPropertyValue('--palette')),
+      colors: process.isClient ? JSON.parse(getComputedStyle(document.body).getPropertyValue('--palette')) : [],
       style: {},
       transitionDelay: "0ms"
     };

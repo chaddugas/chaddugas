@@ -26,7 +26,7 @@ export default {
     return {
       loaded: false,
       cells: { 0: true, 1: true },
-      colorPalette: JSON.parse(getComputedStyle(document.body).getPropertyValue('--palette')),
+      colorPalette: process.isClient ? JSON.parse(getComputedStyle(document.body).getPropertyValue('--palette')) : [],
       colorAssignment: []
     };
   },
