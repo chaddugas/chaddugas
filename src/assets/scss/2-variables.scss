@@ -1,17 +1,24 @@
 $black: #000000;
 $white: #ffffff;
 
-$purple: #7b3dba;
-$red: #ed4939;
-$orange: #f87117;
-$teal: #1cbc9d;
-$green: #adc607;
-$sky: #016FB9;
-$yellow: #f4c10d;
-
 $gray: #F1F1FB;
 $onyx: #232126;
 
+$slate: #253A52;
+
+$blue: #39676B;
+$green: #60A765;
+$yellow: #eba637;
+$orange: #E47D3F;
+$red: #E26246;
+
+$palette: $blue, $green, $yellow, $orange, $red;
+
+$paletteJSON: '';
+@each $color in $palette {
+	$paletteJSON: $paletteJSON + '"#{$color}",';
+}
+$paletteJSON: #{"[" + str-slice($paletteJSON, 1, -2) + "]"};
 
 $xs: 450px;
 $sm: 650px;

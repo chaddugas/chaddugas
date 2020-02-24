@@ -26,14 +26,7 @@ export default {
     return {
       loaded: false,
       cells: { 0: true, 1: true },
-      colorPalette: [
-        "#7b3dba",
-        "#ed4939",
-        "#f87117",
-        "#adc607",
-        "#016FB9",
-        "#f4c10d"
-      ],
+      colorPalette: JSON.parse(getComputedStyle(document.body).getPropertyValue('--palette')),
       colorAssignment: []
     };
   },
@@ -195,15 +188,28 @@ query {
   position: relative;
   grid-area: f;
   background: lighten($onyx, 10%);
-  transition: 0.25s ease;
+	transition: 0.25s ease;
+	z-index: 1;
   &::before {
     display: block;
     content: "";
     padding-top: 100%;
     pointer-events: none;
   }
-  &:hover {
-    color: $yellow;
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 100%;
+    z-index: -1;
+    content: "";
+    background: $slate;
+    transition: 0.25s ease;
+  }
+  &:hover::after {
+    right: 0;
+    bottom: 0;
   }
 }
 

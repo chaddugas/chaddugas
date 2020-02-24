@@ -163,7 +163,6 @@ query {
   flex: 0 0 calc(50% - 20px);
   width: calc(50% - 20px);
 	margin: 0 10px 20px;
-	background: lighten($onyx, 2%);
   transition: 0.25s ease;
   cursor: pointer;
   position: relative;
@@ -184,32 +183,28 @@ query {
     bottom: 100%;
     z-index: -1;
 		content: "";
-		background: currentColor;
+		background: $slate;
     transition: 0.25s ease;
   }
   @media (min-width: $lg) {
     flex: 0 0 calc(25% - 20px);
     width: calc(25% - 20px);
     padding: 20px;
-  }
-  &:nth-child(4n-3) {
-		color: $purple;
-  }
-  &:nth-child(4n-2) {
-		color: $orange;
-  }
-  &:nth-child(4n-1) {
-		color: $sky;
-  }
-  &:nth-child(4n) {
-		color: $red;
-  }
+	}
+	@each $color in $palette {
+		&:nth-child(#{length($palette)}n-#{length($palette) - index($palette, $color)}) {
+			background: $color;
+			.contact-inner {
+				color: choose-contrast-color($color);
+			}
+		}
+	}
 	&:hover {
 		&::after {
 			right: 0;
 			bottom: 0;
 		}
-		.contact-logo {
+		.contact-inner {
 			color: $white;
 		}
 	}
@@ -229,6 +224,7 @@ query {
   align-items: center;
   justify-content: center;
   padding: 8px;
+  transition: 0.3875s ease;
 }
 
 .contact-logo {
@@ -240,7 +236,6 @@ query {
   margin-bottom: 5px;
   width: 100%;
   text-align: center;
-  transition: 0.25s ease;
   @media (min-width: $md) {
     font-size: 50px;
   }
@@ -250,8 +245,6 @@ query {
   font-weight: 700;
   text-align: center;
   font-size: 0.75rem;
-  color: $white;
-  transition: 0.25s ease;
   width: 100%;
   @media (min-width: $md) {
     font-size: 1rem;

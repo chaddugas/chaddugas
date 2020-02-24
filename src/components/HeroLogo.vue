@@ -23,7 +23,7 @@ export default {
 .logo {
   position: relative;
   grid-area: 1 / 1 / 3 / 3;
-  background: $purple;
+  background: $slate;
   transition: 0.25s ease;
   transition: opacity 0.6s ease, transform 0.8s ease;
   transform: translateZ(1px) rotateY(0deg);
@@ -60,11 +60,11 @@ export default {
 @keyframes blink {
   0% {
     background: darken($white, 15%);
-    color: $purple;
+    color: $slate;
   }
   45% {
     background: darken($white, 15%);
-    color: $purple;
+    color: $slate;
   }
   55% {
     background: transparent;
@@ -114,7 +114,7 @@ export default {
 .logo-icons {
   @include fluid-type(400px, 2000px, 22px, 60px);
   display: flex;
-  color: darken($purple, 30%);
+  color: darken($slate, 30%);
   justify-content: flex-end;
   align-items: flex-start;
 	margin: 0 -0.5rem;

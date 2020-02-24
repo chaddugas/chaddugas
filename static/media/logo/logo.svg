@@ -3,22 +3,9 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 800 800" style="enable-background:new 0 0 800 800;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#754B9E;}
-	.st1{fill:#ACC637;}
-	.st2{fill:#EE4939;}
-	.st3{fill:#F37121;}
-	.st4{fill:#F3C118;}
-	.st5{fill:#26B99B;}
-	.st6{fill:#0970B8;}
+	.st0{fill:#253A52;}
 </style>
 <g>
-	<rect x="19.9" y="19.9" class="st0" width="370" height="370"/>
-	<rect x="604.9" y="215.3" class="st1" width="175" height="175"/>
-	<rect x="410.1" y="20.2" class="st2" width="175" height="175"/>
-	<rect x="604.9" y="605" class="st3" width="175" height="175"/>
-	<rect x="410" y="410" class="st4" width="175" height="175"/>
-	<rect x="410" y="605" class="st1" width="175" height="175"/>
-	<rect x="214.9" y="410" class="st5" width="175" height="175"/>
-	<rect x="20.1" y="605.1" class="st6" width="175" height="175"/>
+	<rect x="20" y="20" class="st0" width="760" height="760"/>
 </g>
 </svg>

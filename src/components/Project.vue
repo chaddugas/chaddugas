@@ -78,27 +78,23 @@ export default {
     padding: 1rem 0 0;
     border: none;
 		flex-wrap: wrap;
-    p,
-		p:last-of-type {
+    p {
 			display: flex;
 			justify-content: center;
 			align-items: center;
       padding: 0.5rem;
       margin: 0 0.25rem 0.5rem;
       font-size: 0.75rem;
-      font-style: normal;
-      &:nth-child(4n-3) {
-        background: $sky;
-      }
-      &:nth-child(4n-2) {
-        background: $red;
-      }
-      &:nth-child(4n-1) {
-        background: darken($teal, 10%);
-      }
-      &:nth-child(4n) {
-        background: $purple;
-      }
+			font-style: normal;
+			@each $color in $palette {
+				&:nth-child(#{length($palette)}n-#{length($palette) - index($palette, $color)}) {
+					background: $color;
+					color: choose-contrast-color($color);
+				}
+			}
+			&:last-of-type {
+				margin: 0 0.25rem 0.5rem;
+			}
     }
   }
 }
@@ -226,7 +222,7 @@ export default {
     opacity: 0;
     &:hover {
       span {
-        background: $purple;
+        background: $slate;
       }
       &::before {
         opacity: 1;

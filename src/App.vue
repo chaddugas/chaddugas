@@ -11,6 +11,10 @@ export default {
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=#{str-replace($headings, ' ', '+')}:700,400|#{str-replace($body, ' ', '+')}:300,400,700&display=swap");
 
+:root {
+	--palette: #{$paletteJSON};
+}
+
 html {
   font-size: 16px;
   height: 100%;

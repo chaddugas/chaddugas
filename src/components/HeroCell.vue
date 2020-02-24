@@ -1,29 +1,37 @@
 <template lang='pug'>
 	.hero-cell(:class="{flipped}")
-		.cell-flipper(v-if="active")
-			.cell-face.cell-face--front
+		.cell-flipper(v-if="live")
+			.cell-face.cell-face--front(:style="{transitionDelay}")
 				.cell-fill(:style="style")
-			.cell-face.cell-face--back
+			.cell-face.cell-face--back(:style="{transitionDelay}")
 </template>
 
 <script>
 export default {
   name: "HeroCell",
-  props: ["item", "active_cells", "all_cells"],
+  props: ["item", "active", "all", "hidden"],
   data() {
     return {
-      colors: ["#ed4939", "#f87117", "#adc607", "#016FB9", "#f4c10d"],
-      style: {}
+      colors: JSON.parse(getComputedStyle(document.body).getPropertyValue('--palette')),
+      style: {},
+      transitionDelay: "0ms"
     };
   },
   computed: {
-		active() {
-			return this.all_cells.includes(this.item)
-		},
-    flipped() {
-			if (!this.active) return false
-      return !this.active_cells.includes(this.item);
+    live() {
+      return this.all.includes(this.item);
     },
+    flipped() {
+      if (!this.live) return false;
+      return !this.active.includes(this.item);
+    }
+  },
+  watch: {
+    hidden(to, from) {
+      if (from) {
+        this.transitionDelay = `${Math.floor(Math.random() * 750)}ms`;
+      } else this.transitionDelay = "0ms";
+    }
   },
   created() {
     this.style = {

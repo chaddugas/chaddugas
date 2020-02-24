@@ -1,14 +1,15 @@
 <template lang="pug">
-	section.hero(:class="{'is-hidden': hide}")
-		.hero-scroller(:style="scrollPush") Scroll
-		.hero-inner(@transitionend.self="reset")
+	section.hero(:class="{'is-hidden': hidden, 'is-loaded': loaded}")
+		.hero-scroller(:style="{transform: scrollPush}") Scroll
+		.hero-inner
 			.hero-bg
 				app-hero-cell(
 					v-for="item in total",
-					:key="item", 
+					:key="item",
 					:item="item",
-					:active_cells="active_cells",
-					:all_cells="all_cells")
+					:active="active",
+					:hidden="hidden",
+					:all="all")
 			.hero-content
 				app-hero-logo
 </template>
@@ -27,11 +28,12 @@ export default {
   },
   data() {
     return {
-      active_cells: [],
-      inactive_cells: [],
-      all_cells: [],
-      prevPercentScroll: 0,
-      hide: false,
+			loaded: false,
+      all: [],
+      active: [],
+      inactive: [],
+      last: 0,
+      hidden: false,
       scrollPush: null
     };
   },
@@ -45,37 +47,25 @@ export default {
   },
   methods: {
     flip() {
-      const total = window.innerHeight * 0.8;
-      const percentScroll =
-        window.pageYOffset < total ? window.pageYOffset / total : 1;
+      const top = window.pageYOffset;
+      const height = window.innerHeight;
+      const endPoint = height * 0.8;
+      const scroll = top < endPoint ? top / endPoint : 1;
 
-      const complete = percentScroll === 1 && this.prevPercentScroll === 1;
-      const noChange = percentScroll === this.prevPercentScroll;
+			const complete = scroll === 1 && this.last === 1;
 
-      if (complete || noChange) {
-        if (window.pageYOffset < window.innerHeight * 1.5) {
-          this.scrollPush = `transform: translateY(${(window.pageYOffset -
-            window.innerHeight * 0.8) /
-            1.5}px)`;
+      if (complete) {
+        if (top < height * 1.5) {
+          this.scrollPush = `translateY(${(top - endPoint) / 1.5}px)`;
         }
         return;
       }
 
-      let from =
-        percentScroll > this.prevPercentScroll
-          ? "active_cells"
-          : "inactive_cells";
-      let to =
-        percentScroll > this.prevPercentScroll
-          ? "inactive_cells"
-          : "active_cells";
-      let multiplier =
-        percentScroll > this.prevPercentScroll
-          ? percentScroll
-          : 1 - percentScroll;
-      let moveTotal = Math.floor(
-        (this.active_cells.length + this.inactive_cells.length) * multiplier
-      );
+      let from = scroll > this.last ? "active" : "inactive";
+      let to = scroll > this.last ? "inactive" : "active";
+      let perc = scroll > this.last ? scroll : 1 - scroll;
+
+      let moveTotal = Math.floor((this[to].length + this[from].length) * perc);
 
       if (this[from].length) {
         while (this[to].length < moveTotal) {
@@ -87,49 +77,51 @@ export default {
           );
         }
       }
-      if (
-        percentScroll > this.prevPercentScroll &&
-        !this.active_cells.length &&
-        !this.hide
-      ) {
-        this.hide = true;
-      } else if (percentScroll < this.prevPercentScroll) {
-        this.hide = false;
-      }
-      this.prevPercentScroll = percentScroll;
-    },
-    initCells() {
-      let active_cells = [1, 2, 3];
-      if (process.isClient) {
-        active_cells = [...Array(this.total + 1).keys()];
-        active_cells.shift();
-        active_cells = active_cells.filter(cell => {
-          if (this.media === "xs") return ![1, 2, 4, 5].includes(cell);
-          if (this.media === "sm") return ![1, 2, 5, 6].includes(cell);
-          if (this.media === "lg") return ![1, 2, 6, 7].includes(cell);
-          if (this.media === "xl") return ![1, 2, 7, 8].includes(cell);
+
+      if (!this.active.length && !this.hidden) {
+				this.hidden = scroll > this.last ? true : false;
+      } else if (this.active.length && this.hidden) {
+        this.hidden = false;
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
         });
       }
 
-      this.active_cells = active_cells.filter((item, i) =>
-        Math.random() >= 0.8 ? false : true
-      );
-      this.all_cells = [...this.active_cells];
+      this.last = scroll;
     },
-    reset(e) {
-			if (e.propertyName === 'z-index') {
-				window.scrollTo({
-					top: 0,
-					behavior: 'smooth'
-				})
-			}
+    initCells() {
+      let cells = [...Array(this.total + 1).keys()];
+      cells.shift();
+      cells = cells.filter(cell => {
+        if (this.media === "xs") return ![1, 2, 4, 5].includes(cell);
+        if (this.media === "sm") return ![1, 2, 5, 6].includes(cell);
+        if (this.media === "lg") return ![1, 2, 6, 7].includes(cell);
+        if (this.media === "xl") return ![1, 2, 7, 8].includes(cell);
+      });
+
+      cells = cells.filter((item, i) => (Math.random() >= 0.8 ? false : true));
+			this.all = [...cells];
+      setTimeout(() => {
+				this.loaded = true;
+				if (window.pageYOffset === 0) {
+					this.active = [...this.all]
+				}
+				else {
+					this.inactive = [...this.all]
+				}
+			}, 500);
     }
   },
   created() {
-    this.initCells();
-    if (process.isClient) this.flip();
-    if (process.isClient) window.addEventListener("scroll", this.flip);
-  }
+    if (process.isClient) {
+      this.initCells();
+      window.addEventListener("scroll", this.flip);
+    }
+	},
+	beforeDestroy() {
+		if (process.isClient) window.removeEventListener("scroll", this.flip);
+	}
 };
 </script>
 
@@ -142,16 +134,21 @@ export default {
   height: 180vh;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+	align-items: flex-end;
+	transition: 0.25s ease;
+	opacity: 0;
+	pointer-events: none;
+	&.is-loaded {
+		opacity: 1;
+		pointer-events: all;
+	}
   &.is-hidden {
     .hero-inner {
       transform: translateY(-100%);
-      z-index: 11;
       transition: transform 1.5s ease;
     }
     .hero-scroller {
       opacity: 0.8;
-      transition: opacity 0.75s ease;
     }
   }
 }
@@ -176,9 +173,9 @@ export default {
   align-items: center;
   opacity: 0;
   margin-bottom: 50vh;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.75s ease;
   will-change: transform, opacity;
-  letter-spacing: 1px;
+	letter-spacing: 1px;
   &::before,
   &::after {
     height: 0.75rem;
@@ -203,7 +200,7 @@ export default {
   right: 0;
   bottom: 0;
   width: 100vw;
-  transition: transform 1.5s ease, z-index 1.2s ease;
+  transition: transform 1.5s ease;
   will-change: transform;
   transform: translateY(0);
   z-index: 10;
@@ -228,6 +225,7 @@ export default {
   padding: 20px;
   grid-row-gap: 20px;
   grid-column-gap: 20px;
+  pointer-events: none;
   @media (min-width: $sm) {
     grid-template-rows: repeat(12, 1fr);
     grid-template-columns: repeat(4, 1fr);
@@ -248,6 +246,6 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  pointer-events: none;
+  pointer-events: all;
 }
 </style>
