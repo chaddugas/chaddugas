@@ -5,10 +5,10 @@
 				.about-content-scroller
 					h3 {{title}}
 					Markdown {{ content }}
-			a.about-file(:href="file", target="_blank")
-				.about-file-inner
-					i.fas.fa-check-double
-					span My Resume
+			//- a.about-file(:href="file", target="_blank")
+			//- 	.about-file-inner
+			//- 		i.fas.fa-check-double
+			//- 		span My Resume
 			span.about-block(
 				v-for="cell in Object.keys(cells)",
 				@transitionend.self.once="startInterval(cell)")
@@ -25,8 +25,12 @@ export default {
   data() {
     return {
       loaded: false,
-      cells: { 0: true, 1: true },
-      colorPalette: process.isClient ? JSON.parse(getComputedStyle(document.body).getPropertyValue('--palette')) : [],
+      cells: { 0: true, 1: true, 2: true },
+      colorPalette: process.isClient
+        ? JSON.parse(
+            getComputedStyle(document.body).getPropertyValue("--paletteFull")
+          )
+        : [],
       colorAssignment: []
     };
   },
@@ -77,8 +81,7 @@ query {
     edges {
       node {
 				title
-				content,
-				file
+				content
       }
     }
   }
@@ -94,14 +97,14 @@ query {
   grid-template-rows: auto 1fr 1fr;
   grid-template-areas:
     "c c"
-    "c_1 f"
-    "c_2 c_3";
+    "c_1 c_3"
+    "c_2 .";
   @media (min-width: $md) {
     grid-template-columns: 1fr 1fr 2fr;
     grid-template-rows: 1fr 1fr;
     grid-template-areas:
-      "c_1 f c c"
-      "c_3 c_2 c c";
+      "c_1 c_2 c c"
+      "c_3 . c c";
   }
   &.loaded {
     .about-block {
@@ -111,53 +114,18 @@ query {
 }
 
 .about-content {
+	@include code('about', 'me', lighten($onyx, 2%));
   grid-area: c;
   background: lighten($onyx, 2%);
-  position: relative;
   overflow: hidden;
-  &::before,
-  &::after {
-    position: absolute;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: lighten($onyx, 18%);
-    font-family: $headings;
-    left: 0;
-    right: 0;
-    width: 100%;
-    z-index: 2;
-  }
-  &::before {
-    content: "() => {";
-    top: 0;
-    padding: 1.25rem 1.25rem 0.5rem;
-
-    @media (min-width: $md) {
-      background: lighten($onyx, 2%);
-    }
-  }
-  &::after {
-    content: "}";
-    font-family: $headings;
-    bottom: 0;
-    text-align: right;
-    padding: 1rem 1.25rem 1.25rem;
-
-    @media (min-width: $md) {
-      background: linear-gradient(
-        to top,
-        rgba(lighten($onyx, 2%), 1),
-        rgba(lighten($onyx, 2%), 0.85) 50%,
-        rgba(lighten($onyx, 2%), 0.1)
-      );
-    }
-  }
 }
 
 .about-content-scroller {
-  padding: 4rem 1.5rem 2rem;
+  padding: 2rem 1.5rem;
+	display: flex;
+	flex-direction: column;
   @media (min-width: $sm) {
-    padding: 4rem 3rem 2rem;
+    padding: 2.5rem;
   }
   @media (min-width: $md) {
     padding: 4rem 4rem 3rem 3rem;
@@ -169,7 +137,8 @@ query {
     bottom: 0;
     height: 100%;
     max-height: 100%;
-  }
+	}
+	& > *:first-child { margin-top: auto }
   h3 {
     font-size: 2rem;
     font-weight: 500;
@@ -182,55 +151,7 @@ query {
   *:last-child {
     margin-bottom: 0;
   }
-}
-
-.about-file {
-  position: relative;
-  grid-area: f;
-  background: lighten($onyx, 10%);
-	transition: 0.25s ease;
-	z-index: 1;
-  &::before {
-    display: block;
-    content: "";
-    padding-top: 100%;
-    pointer-events: none;
-  }
-  &::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 100%;
-    z-index: -1;
-    content: "";
-    background: $slate;
-    transition: 0.25s ease;
-  }
-  &:hover::after {
-    right: 0;
-    bottom: 0;
-  }
-}
-
-.about-file-inner {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  i {
-    margin-bottom: 1.25rem;
-    font-size: 3.25rem;
-  }
-  span {
-    font-size: 1.25;
-  }
+	& > *:last-child { margin-bottom: auto }
 }
 
 .about-block {

@@ -44,13 +44,12 @@ collections:
         fields:
           - {label: 'Title', name: 'title', widget: 'string'}
           - {label: 'Content', name: 'content', widget: 'markdown'}
-          - {label: 'Resume', name: 'file', widget: 'file'}
 
       - name: 'contact'
         label: 'Contacts' 
         file: 'static/data/contact.json'
         fields:
-          - {label: 'Title', name: 'title', widget: 'markdown'}
+          - {label: 'Title', name: 'title', widget: 'string'}
           - label: 'Contact Item' 
             name: 'contacts'
             widget: 'list'
@@ -59,5 +58,4 @@ collections:
             fields:
               - {label: 'Title', name: 'title', widget: 'string'}
               - {label: 'Logo', name: 'logo', widget: 'string'}
-              - {label: 'Information', name: 'info', widget: 'text'}
               - {label: 'Link', name: 'link', widget: 'string'}

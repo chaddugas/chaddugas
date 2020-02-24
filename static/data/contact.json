@@ -1,29 +1,25 @@
 {
-  "title": "# Contact\n\nCheckout my work or drop me a line.",
+  "title": "Give my stuff a look, or say hello.",
   "contacts": [
     {
       "title": "Github",
       "logo": "fab fa-github",
-			"info": "Look at the source code for my freelance projects.",
 			"link": "https://github.com/chaddugas"
     },
     {
       "title": "Codepen",
       "logo": "fab fa-codepen",
-			"info": "This is where I like to play with new ideas.",
 			"link": "https://codepen.io/chadd"
-    },
-    {
-      "title": "Twitter",
-      "logo": "fab fa-twitter",
-			"info": "Read any of the 5 things I have ever tweeted.",
-			"link": "https://twitter.com/chad_dugas"
     },
     {
       "title": "Instagram",
       "logo": "fab fa-instagram",
-			"info": "Mostly dogs, nature, and food.",
 			"link": "https://www.instagram.com/chaddugas/"
+    },
+    {
+      "title": "Resume",
+      "logo": "fas fa-stream",
+			"link": "/media/Resume.pdf"
     }
   ]
 }

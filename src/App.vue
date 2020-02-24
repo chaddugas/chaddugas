@@ -13,6 +13,7 @@ export default {
 
 :root {
 	--palette: #{$paletteJSON};
+	--paletteFull: #{$paletteFullJSON};
 }
 
 html {

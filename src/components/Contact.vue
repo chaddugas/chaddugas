@@ -1,16 +1,12 @@
 <template lang="pug">
 	section#contact.contact
-		transition-group.contact-content(name="fade", tag="div")
-			Markdown.contact-wysiwyg(:class="{hidden: active}", :key="'wysiwyg'") {{ main }}
-			.contact-info(v-if="active", :key="'info'") 
-				h3.contact-infoName {{heading}}
-				p.contact-infoCopy {{content}}
+		.contact-content
+			.contact-info
+				p.contact-infoCopy {{title}}
 			
 		.contact-items
 			a.contact-item(
 				v-for="contact in contacts"
-				@mouseover="setContent(contact)",
-				@mouseleave="active = false",
 				:href="contact.link",
 				target="_blank")
 				.contact-inner
@@ -23,29 +19,14 @@
 export default {
   name: "Contact",
   data() {
-    return {
-      active: false,
-      active_item: null
-    };
+    return {};
   },
   computed: {
-    heading() {
-      return this.active_item.title;
-    },
-    content() {
-      return this.active_item.info;
-    },
-    main() {
+    title() {
       return this.$static.contact.edges[0].node.title;
     },
     contacts() {
       return this.$static.contact.edges[0].node.contacts;
-    }
-  },
-  methods: {
-    setContent(item) {
-      this.active_item = item;
-      this.active = true;
     }
   }
 };
@@ -60,7 +41,6 @@ query {
         contacts {
 					logo
           title
-          info 
 					link
         }
       }
@@ -98,6 +78,7 @@ query {
 }
 
 .contact-content {
+	@include code('contact', 'platforms', lighten($onyx, 2%));
 	display: flex;
   background: lighten($onyx, 2%);
   align-self: stretch;
@@ -108,44 +89,26 @@ query {
   @media (min-width: $lg) {
     margin-right: 20px;
     margin-bottom: 0;
-    flex: 0 1 450px;
-  }
-}
-
-.contact-info,
-.contact-wysiwyg {
-  width: 100%;
-  pointer-events: none;
-  padding: 1rem 2.5rem;
-	color: $white;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-}
-
-.contact-wysiwyg {
-  opacity: 1;
-  transition: opacity 0.25s;
-  font-size: 1rem;
-  &.hidden {
-    opacity: 0;
+    flex: 0 1 50%;
   }
 }
 
 .contact-info {
+  width: auto;
+  padding: 1rem 2.5rem;
+	display: flex;
+	align-items: center;
+  @media (min-width: $lg) {
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
-  width: auto;
+	}
 }
 
-.contact-infoName {
-  font-size: 1.75rem;
-  font-weight: 400;
-  font-family: $headings;
-  margin-bottom: 1rem;
+.contact-infoCopy {
+	font-size: 1.125rem;
 }
 
 .contact-items {

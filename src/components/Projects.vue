@@ -2,7 +2,7 @@
 	section#projects.projects
 		.projects-inner
 			.projects-title
-				h2
+				h3
 					span My 
 					span Recent
 					span Work
@@ -87,14 +87,12 @@ query {
 }
 
 .projects-title {
-  position: relative;
+	@include code('work', 'projects', lighten($onyx, 2%));
   z-index: -1;
   flex: 0 0 calc(50% - 20px);
   width: calc(50% - 20px);
   margin: 0 10px 20px;
-  background: lighten($onyx, 2%);
-  transition: none;
-  transition-delay: 0;
+
   @media (min-width: $xs) {
     padding: 30px;
   }
@@ -105,7 +103,8 @@ query {
     flex: 0 0 calc(33.333% - 20px);
     width: calc(33.333% - 20px);
   }
-  h2 {
+  h3 {
+		@include fluid-type(400px, 1450px, 16px, 40px);
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -113,30 +112,14 @@ query {
     padding: 20px;
     height: 100%;
     width: 100%;
-    text-align: right;
+		font-weight: 500;
+		font-family: $headings;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    font-size: 22px;
-    line-height: 1.1;
-    text-transform: uppercase;
-    @media (min-width: $xs) {
-      font-size: 28px;
-    }
-    @media (min-width: $sm) {
-      font-size: 45px;
-    }
-    @media (min-width: $md) {
-      font-size: 50px;
-      line-height: 1.2;
-    }
-    @media (min-width: $lg) {
-      font-size: 55px;
-    }
-    @media (min-width: $xl) {
-      font-size: 65px;
-    }
+    line-height: 1.2;
+		text-transform: uppercase;
     span {
       margin-left: auto;
       display: flex;

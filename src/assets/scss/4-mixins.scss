@@ -28,3 +28,45 @@
     }
   }
 }
+
+@mixin code($var, $attr, $bg) {
+	background: $bg;
+	position: relative;
+	z-index: 1;
+  &::before,
+  &::after {
+		@include fluid-type(850px, 1450px, 14px, 24px);
+    position: absolute;
+    font-weight: 700;
+    color: lighten($onyx, 18%);
+    font-family: $headings;
+    left: 0;
+    right: 0;
+    width: 100%;
+		z-index: 2;
+		white-space: nowrap;
+		overflow: hidden;
+  }
+  &::before {
+    top: 0;
+    @media (min-width: $md) {
+			content: "#{$var}: (#{$attr}) => {";
+			padding: 1.25rem 1.25rem 0.5rem;
+      background: $bg;
+    }
+  }
+  &::after {
+    bottom: 0;
+    text-align: right;
+    @media (min-width: $md) {
+			content: "}";
+			padding: 1rem 1.25rem 1.25rem;
+      background: linear-gradient(
+        to top,
+        rgba($bg, 1),
+        rgba($bg, 0.85) 50%,
+        rgba($bg, 0.1)
+      );
+    }
+  }
+}

@@ -20,6 +20,14 @@ $paletteJSON: '';
 }
 $paletteJSON: #{"[" + str-slice($paletteJSON, 1, -2) + "]"};
 
+$paletteFull: $slate, $blue, $green, $yellow, $orange, $red;
+
+$paletteFullJSON: '';
+@each $color in $paletteFull {
+	$paletteFullJSON: $paletteFullJSON + '"#{$color}",';
+}
+$paletteFullJSON: #{"[" + str-slice($paletteFullJSON, 1, -2) + "]"};
+
 $xs: 450px;
 $sm: 650px;
 $md: 850px;
