@@ -104,12 +104,8 @@ export default {
 			this.all = [...cells];
       setTimeout(() => {
 				this.loaded = true;
-				if (window.pageYOffset === 0) {
-					this.active = [...this.all]
-				}
-				else {
-					this.inactive = [...this.all]
-				}
+				this.active = [...this.all]
+				this.flip();
 			}, 500);
     }
   },
