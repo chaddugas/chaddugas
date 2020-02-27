@@ -4,9 +4,13 @@
 			.project-content
 				.project-data
 					.project-image
-						g-image(:src="project.photo" width="470")
+						picture
+							source(:srcset="project.photo.substring(0, project.photo.length - 4) + '.webp'")
+							img(:src="project.photo")
 						a(:href="project.link", target="_blank", @click.stop="")
-							g-image(:src="project.secondary_photo || project.photo", width="950")
+							picture
+								source(:srcset="project.secondary_photo.substring(0, project.secondary_photo.length - 4) + '.webp'")
+								img(:src="project.secondary_photo")
 							span view
 					.project-name
 						h3 {{ project.title }}
@@ -109,7 +113,6 @@ export default {
   flex: 0 0 calc(50% - 20px);
   width: calc(50% - 20px);
   margin: 0 10px 20px;
-  background-size: 0 0;
   opacity: 0;
   transform: rotateY(-180deg);
   backface-visibility: hidden;
@@ -219,7 +222,8 @@ export default {
   z-index: 1;
   transition: 700ms ease;
   will-change: transform, opacity;
-  img,
+  picture,
+	img,
   a {
     transition: 250ms ease;
     max-width: 100%;
@@ -229,8 +233,12 @@ export default {
     right: 0;
     bottom: 0;
     opacity: 1;
+		object-fit: cover;
     pointer-events: none;
   }
+	picture {
+		object-fit: cover;
+	}
   a {
     opacity: 0;
     &:hover {
@@ -331,7 +339,7 @@ export default {
     &::before {
       padding-top: 50%;
     }
-    & > img {
+    & > picture {
       opacity: 0;
     }
     a {
