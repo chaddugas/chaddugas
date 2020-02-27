@@ -18,6 +18,8 @@
     "vue-markdown": "^2.2.4"
   },
   "devDependencies": {
+    "imagemin-webp": "^5.1.0",
+    "imagemin-webpack": "^5.1.1",
     "node-sass": "^4.12.0",
     "postcss-loader": "^3.0.0",
     "pug": "^2.0.4",

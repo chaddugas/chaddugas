@@ -1,4 +1,5 @@
 const path = require('path')
+const ImageminPlugin = require("imagemin-webpack");
 
 function addStyleResource (rule) {
   rule.use('style-resource')

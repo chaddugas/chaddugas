@@ -1,12 +1,12 @@
 <template lang="pug">
-	.project(:class="{active, 'is-opening': opening, 'is-closing': closing, 'is-loaded': loaded}", :style="`background-image: url(${project.photo})`", @click="close")
+	.project(:class="{active, 'is-opening': opening, 'is-closing': closing, 'is-loaded': loaded}", @click="close")
 		.project-inner(@click.stop="toggle", @transitionend.self="transitionend")
 			.project-content
 				.project-data
 					.project-image
-						img(:src="project.photo")
+						g-image(:src="project.photo" width="470")
 						a(:href="project.link", target="_blank", @click.stop="")
-							img(:src="project.secondary_photo || project.photo")
+							g-image(:src="project.secondary_photo || project.photo", width="950")
 							span view
 					.project-name
 						h3 {{ project.title }}
