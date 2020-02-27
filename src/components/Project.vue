@@ -36,6 +36,7 @@ export default {
   },
   methods: {
     canUseWebP(img) {
+			if (!process.isClient) return img
       const elem = document.createElement("canvas");
       let allow = false;
       if (!!(elem.getContext && elem.getContext("2d"))) {
