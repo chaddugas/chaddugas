@@ -5,11 +5,11 @@
 				.project-data
 					.project-image
 						picture
-							source(:srcset="project.photo.substring(0, project.photo.length - 4) + '.webp'")
+							//- source(:srcset="project.photo.substring(0, project.photo.length - 4) + '.webp'")
 							img(v-lazy="project.photo")
 						a(:href="project.link", target="_blank", @click.stop="")
 							picture
-								source(:srcset="project.secondary_photo.substring(0, project.secondary_photo.length - 4) + '.webp'")
+								//- source(:srcset="project.secondary_photo.substring(0, project.secondary_photo.length - 4) + '.webp'")
 								img(v-lazy="project.secondary_photo")
 							span view
 					.project-name
