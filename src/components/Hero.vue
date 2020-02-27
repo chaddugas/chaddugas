@@ -106,6 +106,7 @@ export default {
       setTimeout(() => {
 			this.flip();
 			this.loaded = true;
+			if (!this.hidden) window.scrollTo({top: 0, behavior: "smooth"})
 			}, 500);
     }
   },

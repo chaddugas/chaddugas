@@ -4,13 +4,9 @@
 			.project-content
 				.project-data
 					.project-image
-						picture
-							//- source(:srcset="project.photo.substring(0, project.photo.length - 4) + '.webp'")
-							img(v-lazy="project.photo")
+						img(v-lazy="photos.sm")
 						a(:href="project.link", target="_blank", @click.stop="")
-							picture
-								//- source(:srcset="project.secondary_photo.substring(0, project.secondary_photo.length - 4) + '.webp'")
-								img(v-lazy="project.secondary_photo")
+							img(v-lazy="photos.lg")
 							span view
 					.project-name
 						h3 {{ project.title }}
@@ -30,7 +26,24 @@ export default {
       closing: false
     };
   },
+  computed: {
+    photos() {
+      return {
+        sm: this.canUseWebP(this.project.photo),
+        lg: this.canUseWebP(this.project.secondary_photo)
+      };
+    }
+  },
   methods: {
+    canUseWebP(img) {
+      const elem = document.createElement("canvas");
+      let allow = false;
+      if (!!(elem.getContext && elem.getContext("2d"))) {
+        allow = elem.toDataURL("image/webp").indexOf("data:image/webp") == 0;
+      }
+
+      return allow ? `${img.substring(0, img.length - 4) + ".webp"}` : img;
+    },
     toggle() {
       this.$el.querySelector(".project-content").scrollTop = 0;
       this.active = !this.active;
@@ -62,18 +75,26 @@ export default {
 <style lang="scss">
 .project-wysiwyg {
   h1 {
-    margin: 0 0 1.25rem;
+    margin: 0 0 0.75rem;
     width: auto;
     padding: 0;
     font-weight: 300;
     line-height: 1.4;
     font-family: $body;
-    font-size: 2rem;
+    font-size: 1.25rem;
+    @media (min-width: $md) {
+      font-size: 2rem;
+      margin: 0 0 1.25rem;
+    }
   }
   p {
+    font-size: 0.875rem;
     margin: 0 0 1rem;
     &:last-of-type {
       margin-bottom: 2rem;
+    }
+    @media (min-width: $md) {
+      font-size: 1rem;
     }
   }
   blockquote {
@@ -222,8 +243,7 @@ export default {
   z-index: 1;
   transition: 700ms ease;
   will-change: transform, opacity;
-  picture,
-	img,
+  img,
   a {
     transition: 250ms ease;
     max-width: 100%;
@@ -233,12 +253,9 @@ export default {
     right: 0;
     bottom: 0;
     opacity: 1;
-		object-fit: cover;
+    object-fit: cover;
     pointer-events: none;
   }
-	picture {
-		object-fit: cover;
-	}
   a {
     opacity: 0;
     &:hover {
@@ -314,13 +331,16 @@ export default {
 }
 
 .project-wysiwyg {
-  margin: 2rem 1.25rem 1.25rem;
+  margin: 1.5rem 0.875rem 0.875rem;
   opacity: 0;
   visibility: hidden;
   will-change: opacity;
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
+  @media (min-width: $md) {
+    margin: 2rem 1.25rem 1.25rem;
+  }
 }
 
 .project.active {
@@ -335,11 +355,11 @@ export default {
   .project-image {
     transform: scale(1, 1);
     opacity: 1;
-    margin: 20px 20px 0;
+    margin: 0.875rem 0.875rem 0;
     &::before {
       padding-top: 50%;
     }
-    & > picture {
+    & > img {
       opacity: 0;
     }
     a {
@@ -348,6 +368,9 @@ export default {
         opacity: 1;
         pointer-events: all;
       }
+    }
+    @media (min-width: $md) {
+      margin: 1.25rem 1.25rem 0;
     }
   }
   .project-name {

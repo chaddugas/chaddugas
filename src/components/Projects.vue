@@ -58,8 +58,8 @@ query {
       node {
         projects {
           title
-          photo (width: 500, quality: 90)
-					secondary_photo (width: 950, quality: 90)
+          photo
+					secondary_photo
           description
 					link
           visible
