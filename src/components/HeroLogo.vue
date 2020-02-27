@@ -36,7 +36,13 @@ export default {
       opacity: 0;
       transition: opacity 0.4s ease;
     }
-  }
+	}
+	
+	&::selection,
+	*::selection {
+		background: transparent;
+		color: inherit;
+	}
 }
 
 .logo-inner {
@@ -51,7 +57,6 @@ export default {
   padding: 1.25rem;
   transition: opacity 0.4s 0.4s ease;
   text-align: right;
-  // color: $white;
   @media (min-width: $md) {
     padding: 3rem;
   }

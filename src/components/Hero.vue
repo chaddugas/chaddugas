@@ -216,12 +216,10 @@ export default {
   display: grid;
   grid-template-rows: repeat(15, 1fr);
   grid-template-columns: repeat(3, 1fr);
-  z-index: 1;
   height: 100%;
   padding: 20px;
   grid-row-gap: 20px;
   grid-column-gap: 20px;
-  pointer-events: none;
   @media (min-width: $sm) {
     grid-template-rows: repeat(12, 1fr);
     grid-template-columns: repeat(4, 1fr);
@@ -242,6 +240,6 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  pointer-events: all;
+  pointer-events: none;
 }
 </style>
