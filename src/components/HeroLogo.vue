@@ -119,12 +119,14 @@ export default {
   align-items: flex-start;
 	margin: 0 -0.5rem;
 	opacity: 0.3;
-  svg {
+	svg,
+	i {
     margin: 0 0.5rem;
   }
   @media (min-width: $sm) {
     margin: 0 -0.75rem;
-    svg {
+		svg,
+		i {
       margin: 0 0.75rem;
     }
   }
