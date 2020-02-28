@@ -21,7 +21,8 @@ export default {
 
 <style lang="scss">
 .logo {
-  position: relative;
+	position: relative;
+	font-family: $headings;
   grid-area: 1 / 1 / 3 / 3;
   background: $slate;
   transition: 0.25s ease;
@@ -54,7 +55,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 1.25rem;
+  padding: .875rem;
   transition: opacity 0.4s 0.4s ease;
   text-align: right;
   @media (min-width: $md) {
@@ -82,7 +83,7 @@ export default {
 }
 
 .logo-name {
-  @include fluid-type(600px, 1450px, 24px, 56px);
+  @include fluid-type(600px, 1450px, 22px, 56px);
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -98,7 +99,7 @@ export default {
 }
 
 .logo-title {
-  @include fluid-type(600px, 1450px, 18px, 28px);
+  @include fluid-type(600px, 1450px, 16px, 28px);
   text-transform: lowercase;
 	margin-bottom: 1rem;
 	color: darken($white, 15%);
@@ -117,16 +118,16 @@ export default {
 }
 
 .logo-icons {
-  @include fluid-type(400px, 2000px, 22px, 60px);
+  @include fluid-type(400px, 2000px, 18px, 60px);
   display: flex;
-  color: darken($slate, 30%);
+  color: lighten($slate, 45%);
   justify-content: flex-end;
   align-items: flex-start;
-	margin: 0 -0.5rem;
+	margin: 0 -0.3875rem;
 	opacity: 0.3;
 	svg,
 	i {
-    margin: 0 0.5rem;
+    margin: 0 0.3875rem;
   }
   @media (min-width: $sm) {
     margin: 0 -0.75rem;

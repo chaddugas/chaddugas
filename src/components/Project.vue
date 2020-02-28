@@ -110,7 +110,7 @@ export default {
       align-items: center;
       padding: 0.5rem;
       margin: 0 0.25rem 0.5rem;
-      font-size: 0.75rem;
+			font-size: 0.875rem;
       font-style: normal;
       @each $color in $palette {
         &:nth-child(#{length($palette)}n-#{length($palette)

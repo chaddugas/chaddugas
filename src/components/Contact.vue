@@ -48,24 +48,6 @@ query {
   }
 }
 </static-query>
-
-<style lang="scss">
-.contact-wysiwyg {
-	h1 {
-		font-size: 1.75rem !important;
-	}
-  * {
-		font-family: $headings !important;
-		font-weight: 400 !important;
-		color: $white !important;
-		margin-bottom: 1rem !important;
-    &:last-child {
-      margin-bottom: 0 !important;
-    }
-  }
-}
-</style>
-
 <style lang="scss" scoped>
 .contact {
   @include container;
@@ -207,7 +189,7 @@ query {
 .contact-name {
   font-weight: 700;
   text-align: center;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   width: 100%;
   @media (min-width: $md) {
     font-size: 1rem;
