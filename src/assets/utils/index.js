@@ -1,1 +1,0 @@
-export { default as readData:function } from './readData';

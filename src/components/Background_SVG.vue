@@ -1,32 +1,32 @@
 <template lang="pug">
-#background
-  svg(
-    x='0px'
-    y='0px'
-    :viewBox='`0 0 ${canvas.width} ${canvas.height}`'
-    xml:space='preserve')
-    linearGradient#gradient(
-      x1="0"
-      y1="0"
-      x2="1"
-      y2="0")
-      stop(offset="0" style="stop-color:#FBA919")
-      stop(offset="0.5" style="stop-color:#C6549F")
-      stop(offset="1" style="stop-color:#EE2553")
-    circle(
-      v-for="circle in circles"
-      :key="circle.id"
-      :id='circle.id'
-      :cx='circle.cx'
-      :cy='circle.cy'
-      :r='circle.r'
-      :style="circle.style")
+Teleport(to="#fixed")
+  #background
+    svg(
+      x='0px'
+      y='0px'
+      :viewBox='`0 0 ${canvas.width} ${canvas.height}`'
+      xml:space='preserve')
+      linearGradient#gradient(
+        x1="0"
+        y1="0"
+        x2="1"
+        y2="0")
+        stop(offset="0" style="stop-color:var(--stop1)")
+        stop(offset="0.5" style="stop-color:var(--stop2)")
+        stop(offset="1" style="stop-color:var(--stop3)")
+      circle(
+        v-for="circle in circles"
+        :key="circle.id"
+        :id='circle.id'
+        :cx='circle.cx'
+        :cy='circle.cy'
+        :r='circle.r'
+        :style="circle.style")
 </template>
-
 
 <script setup lang="ts">
 import { ref, reactive, computed, watch, watchEffect, onBeforeUnmount } from 'vue';
-import { useMediaQuery } from '@vueuse/core'
+import { useMediaQuery } from '@vueuse/core';
 import gsap from 'gsap';
 
 interface Canvas {
@@ -62,7 +62,7 @@ const props = defineProps({
 const initial = ref(true);
 const ready = ref(false);
 
-const isTouchScreen = useMediaQuery('(pointer: coarse)')
+const isTouchScreen = useMediaQuery('(pointer: coarse)');
 
 const height = ref(window.innerHeight);
 const width = ref(window.innerWidth);
@@ -85,29 +85,37 @@ const points = ref(20);
 const count = ref(17);
 
 const makeCircles = (): Array<Circle> => {
-  return Array.from({ length: count.value }, (_, i): Circle => {
-    const angle = ((2 * Math.PI * i) / points.value + Math.PI / 5);
+  return Array.from(
+    { length: count.value },
+    (_, i): Circle => {
+      const angle = (2 * Math.PI * i) / points.value + Math.PI / 5;
 
-    const id = `circle-${i}`;
-    const cx = computed(() => Math.round(canvas.centerX + (canvas.arc * 1) * Math.cos(angle)));
-    const cy = computed(() => Math.round(canvas.centerY + (canvas.arc * 1) * Math.sin(angle)));
-    const r = computed(() => Math.round(Math.max(size.value * (inflation.value / 10), 20)));
+      const id = `circle-${i}`;
+      const cx = computed(() =>
+        Math.round(canvas.centerX + canvas.arc * 1 * Math.cos(angle))
+      );
+      const cy = computed(() =>
+        Math.round(canvas.centerY + canvas.arc * 1 * Math.sin(angle))
+      );
+      const r = computed(() =>
+        Math.round(Math.max(size.value * (inflation.value / 10), 20))
+      );
 
-    return {
-      id,
-      cx,
-      cy,
-      r,
-      isPopped: false,
-      rotate: 0,
-      x: 0,
-      y: 0,
-      scale: initial.value ? 0 : 1,
-      fillOpacity: 1,
-      strokeWidth: 0,
-      alpha: 1,
-      get style(): string {
-        return `
+      return {
+        id,
+        cx,
+        cy,
+        r,
+        isPopped: false,
+        rotate: 0,
+        x: 0,
+        y: 0,
+        scale: initial.value ? 0 : 1,
+        fillOpacity: 1,
+        strokeWidth: 0,
+        alpha: 1,
+        get style(): string {
+          return `
           transform-origin: ${this.cx}px ${this.cy}px;
           transform:
               matrix(
@@ -123,15 +131,18 @@ const makeCircles = (): Array<Circle> => {
           stroke-width: ${this.strokeWidth};
           fill-opacity: ${this.fillOpacity};
           opacity: ${this.alpha};`;
-      }
-    };
-  }).reverse()
-}
+        },
+      };
+    }
+  ).reverse();
+};
 
 const circles = ref(makeCircles());
 
 const popCircle = (circle: Circle, displacementX: number, displacementY: number) => {
-  const displacedDistance = Math.sqrt(displacementX * displacementX + displacementY * displacementY);
+  const displacedDistance = Math.sqrt(
+    displacementX * displacementX + displacementY * displacementY
+  );
   const popThreshold = canvas.size * (17 / 150);
 
   if (displacedDistance > popThreshold) {
@@ -140,7 +151,7 @@ const popCircle = (circle: Circle, displacementX: number, displacementY: number)
 
     const pop = gsap.timeline({
       onComplete() {
-        const checkDistance = setInterval(() => {
+        const checkDistance = window.setInterval(() => {
           if (!props.mouse) return clearInterval(checkDistance);
 
           const dx = props.mouse.x - circle.cx;
@@ -151,27 +162,33 @@ const popCircle = (circle: Circle, displacementX: number, displacementY: number)
             reform.play();
           }
         }, 100);
-      }
+      },
     });
 
     const reform = gsap.timeline({
       paused: true,
       onComplete() {
         circle.isPopped = false;
-      }
+      },
     });
 
-    pop.to(circle, {
-      scale: 1.8,
-      strokeWidth: 1,
-      fillOpacity: 0,
-      duration: 0.4,
-      ease: 'power4.out',
-    }).to(circle, {
-      alpha: 0,
-      duration: 0.5,
-      ease: 'power4.out',
-    }, '<');
+    pop
+      .to(circle, {
+        scale: 1.8,
+        strokeWidth: 1,
+        fillOpacity: 0,
+        duration: 0.4,
+        ease: 'power4.out',
+      })
+      .to(
+        circle,
+        {
+          alpha: 0,
+          duration: 0.5,
+          ease: 'power4.out',
+        },
+        '<'
+      );
 
     reform.set(circle, {
       x: 0,
@@ -181,15 +198,18 @@ const popCircle = (circle: Circle, displacementX: number, displacementY: number)
       scale: 0,
     });
 
-    reform.to(circle, {
-      scale: 1,
-      alpha: 1,
-      duration: 0.5,
-      ease: 'power4.out',
-    }, '>');
+    reform.to(
+      circle,
+      {
+        scale: 1,
+        alpha: 1,
+        duration: 0.5,
+        ease: 'power4.out',
+      },
+      '>'
+    );
   }
-
-}
+};
 
 const displaceCircles = (): void => {
   if (isTouchScreen.value) return;
@@ -201,7 +221,7 @@ const displaceCircles = (): void => {
     const direction = { x: -dx / distance, y: -dy / distance };
 
     const forceMultiplier = canvas.size / 8;
-    const forceMagnitude = (1 / (distance / 50 + 1));
+    const forceMagnitude = 1 / (distance / 50 + 1);
     const forceCoefficient = forceMultiplier * forceMagnitude;
 
     const displacementX = direction.x * forceCoefficient;
@@ -210,11 +230,11 @@ const displaceCircles = (): void => {
     gsap.to(circle, {
       x: displacementX,
       y: displacementY,
-      duration: 0.5
+      duration: 0.5,
     });
 
-    popCircle(circle, displacementX, displacementY)
-  })
+    popCircle(circle, displacementX, displacementY);
+  });
 };
 
 watchEffect(displaceCircles);
@@ -227,7 +247,7 @@ const bootstrapStaticAnimations = () => {
     repeat: -1,
     repeatDelay: 2,
     repeatRefresh: true,
-    paused: true
+    paused: true,
   });
 
   circles.value.forEach((circle): void => {
@@ -245,41 +265,45 @@ const bootstrapStaticAnimations = () => {
   });
 
   if (initial.value) {
-    // gsap.to(canvas, {
-    //   centerX: window.innerWidth * 0.5,
-    //   centerY: window.innerHeight * 0.5,
-    //   arc: (Math.min(window.innerHeight, window.innerWidth) / 2) * 0.6,
-    //   ease: 'power4.InOut',
-    //   scrollTrigger: {
-    //     trigger: '#portfolio',
-    //     start: 'top top',
-    //     end: 'bottom bottom',
-    //     scrub: 5,
-    //   },
-    // });
+    gsap.to(inflation, {
+      value: 1,
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1,
+      },
+    });
+    gsap.to(offset, {
+      value: 0,
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1,
+      },
+    });
 
-    gsap.to(circles.value,
-      {
-        scale: 1,
-        duration: 1,
-        stagger: {
-          each: 0.1,
-          from: 3,
-        },
-        ease: 'power4.out',
-        delay: 1,
-        onUpdate() {
-          if (this.progress() > 0.1 && !ready.value) {
-            ready.value = true;
-          }
-        },
-        onComplete() {
-          initial.value = false;
-          pulse.play();
+    gsap.to(circles.value, {
+      scale: 1,
+      duration: 1,
+      stagger: {
+        each: 0.1,
+        from: 3,
+      },
+      ease: 'power4.out',
+      delay: 1,
+      onUpdate() {
+        if (this.progress() > 0.1 && !ready.value) {
+          ready.value = true;
         }
-      });
-  }
-  else {
+      },
+      onComplete() {
+        initial.value = false;
+        pulse.play();
+      },
+    });
+  } else {
     pulse.play();
   }
 };
@@ -292,26 +316,31 @@ const updateDimensions = (): void => {
   bootstrapStaticAnimations();
 };
 
-watch(() => props.loaded, () => {
-  if (props.loaded) {
-    bootstrapStaticAnimations();
-    window.addEventListener('resize', updateDimensions);
+watch(
+  () => props.loaded,
+  () => {
+    if (props.loaded) {
+      bootstrapStaticAnimations();
+      window.addEventListener('resize', updateDimensions);
+    }
   }
-});
+);
 
 onBeforeUnmount((): void => {
   window.removeEventListener('resize', updateDimensions);
 });
-
 </script>
-
 
 <style lang="scss" scoped>
 #background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   grid-area: 1 / 1 / 2 / 2;
   pointer-events: none;
-  position: relative;
   mix-blend-mode: multiply;
 }
 

@@ -30,7 +30,6 @@ body,
   padding: 0;
   margin: 0;
   width: 100vw;
-  min-height: 100vh;
   grid-area: 1 / 1 / 2 / 2;
 }
 
