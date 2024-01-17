@@ -1,8 +1,9 @@
 $minWidth: 20rem;
 $maxWidth: 82rem;
 
-$black: #080808;
+$black: #000000;
 $white: #ffffff;
+$lightGray: #e4edf3;
 
 $orange: #fba919;
 $pink: #c6549f;
@@ -10,6 +11,8 @@ $berry: #ee2553;
 $blue: #27249c;
 $sky: #177aee;
 $purple: #4a19d2;
+$green: darken(#bada55, 15%);
+$teal: #66cdaa;
 
 @function strip-unit($value) {
   @return math.div($value, ($value * 0 + 1));
@@ -60,5 +63,24 @@ $purple: #4a19d2;
     @media screen and (min-width: $screenMax) {
       #{$prop}: $max;
     }
+  }
+}
+
+@mixin icon {
+  font-family: 'icons' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media speech {
+    display: none;
+    visibility: hidden;
   }
 }

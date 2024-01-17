@@ -1,0 +1,17 @@
+[class^='icon-'],
+[class*=' icon-'] {
+  @include icon;
+}
+
+.icon-client-facing:before {
+  content: '\e900';
+}
+.icon-dev:before {
+  content: '\e901';
+}
+.icon-design:before {
+  content: '\e902';
+}
+.icon-lead:before {
+  content: '\e903';
+}

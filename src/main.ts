@@ -1,18 +1,26 @@
-import { createApp } from 'vue'
-import { default as gsap, ScrollSmoother, ScrollTrigger, SplitText } from 'gsap/all';
-import './style.css'
-import App from './App.vue'
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
+import App from './App.vue';
+
+import {
+  default as gsap,
+  ScrollSmoother,
+  ScrollTrigger,
+  SplitText,
+} from 'gsap/all';
 
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger, SplitText);
 
-const smoother = ScrollSmoother.create({
-  wrapper: '#wrapper',
-  content: '#content',
-  smooth: 1,
-  effects: true,
-  normalizeScroll: true,
-});
+const pinia = createPinia();
+const app = createApp(App);
 
-smoother.paused(true);
+const wrapper = document.querySelector('#wrapper') as HTMLElement;
+const content = document.querySelector('#content') as HTMLElement;
+const modals = document.querySelector('#modals') as HTMLElement;
 
-createApp(App).mount('#app');
+app.provide('wrapper', wrapper);
+app.provide('content', content);
+app.provide('modals', modals);
+
+app.use(pinia);
+app.mount('#app');

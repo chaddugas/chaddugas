@@ -1,0 +1,213 @@
+@font-face {
+  font-family: Oswald;
+  font-style: normal italic;
+  font-weight: 100 200 300 400 500 600 700;
+  font-display: block;
+  src: url(/fonts/Oswald-VariableFont_wght.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'icons';
+  src: url('/fonts/icons/icons.woff') format('woff'),
+    url('/fonts/icons/icons.ttf') format('truetype'),
+    url('/fonts/icons/icons.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+@import './icons.scss';
+
+:root {
+  --black: #{$black};
+  --white: #{$white};
+  --orange: #{$orange};
+  --pink: #{$pink};
+  --berry: #{$berry};
+  --blue: #{$blue};
+  --sky: #{$sky};
+  --purple: #{$purple};
+  --green: #{$green};
+  --teal: #{$teal};
+  --stop1: #{$orange};
+  --stop2: #{$pink};
+  --stop3: #{$berry};
+  font-family: Oswald, sans-serif;
+  line-height: 1.5;
+  font-weight: 700;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: $black;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+}
+
+html {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  box-sizing: border-box;
+  font-size: 16px;
+  width: 100vw;
+  min-height: 100vh;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+}
+
+body {
+  grid-area: 1 / 1 / 2 / 2;
+  margin: 0;
+  padding: 1rem;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    border: 1rem solid $black;
+    z-index: 2000;
+    pointer-events: none;
+  }
+}
+
+#wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  z-index: 0;
+}
+
+#content,
+#modals {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+#content {
+  position: relative;
+  will-change: left;
+  &[inert] {
+    pointer-events: none;
+  }
+}
+
+#modals {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  height: calc(100vh - 2rem);
+  width: calc(100vw - 2rem);
+  position: sticky;
+  top: 1rem;
+  // z-index: 3;
+  // transition: z-index 0s 0.5s;
+
+  &[inert] {
+    pointer-events: none;
+    visibility: hidden;
+    // z-index: -1;
+    // transition: none;
+  }
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+
+  &--small {
+    --rail: min(9ch, 60vw);
+    font-size: 7.5rem;
+    max-width: var(--rail);
+    .section__title,
+    .section__content {
+      @include fluid(padding-inline, 1.5rem, 3rem);
+      margin: 0;
+    }
+
+    .section__title {
+      @include fluid(padding-top, 1.5rem, 3rem);
+      @include fluid(padding-bottom, 0.5rem, 1rem);
+
+      & > * {
+        @include fluid(font-size, 2rem, 4rem);
+        letter-spacing: 2px;
+      }
+    }
+
+    .section__content {
+      @include fluid(padding-top, 0.5rem, 1rem);
+      @include fluid(padding-bottom, 1.5rem, 3rem);
+      flex: 1 1 100%;
+    }
+  }
+
+  &--right {
+    align-self: flex-end;
+  }
+
+  &--left {
+    align-self: flex-start;
+  }
+
+  &--center {
+    align-self: center;
+  }
+
+  &--dark {
+    .section__title,
+    .section__content {
+      background-color: $black;
+      color: $white;
+    }
+
+    .section__title {
+      mix-blend-mode: darken;
+    }
+  }
+
+  &__title,
+  &__content {
+    @include fluid(padding-inline, 2rem, 4rem);
+    z-index: 1000;
+    position: relative;
+    // margin-inline: 1rem;
+    background-color: $white;
+    color: $black;
+  }
+
+  &__title {
+    @include fluid(padding-top, 2rem, 4rem);
+    @include fluid(padding-bottom, 0.5rem, 1rem);
+    // margin-top: 1rem;
+    mix-blend-mode: lighten;
+
+    & > * {
+      @include fluid(font-size, 3.25rem, 6rem);
+      margin: 0;
+      line-height: 1;
+      text-transform: uppercase;
+      text-align: center;
+      letter-spacing: 4px;
+    }
+  }
+
+  &__content {
+    @include fluid(padding-top, 0.5rem, 1rem);
+    @include fluid(padding-bottom, 2rem, 4rem);
+    @include fluid(font-size, 1rem, 1.25rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    font-weight: 300;
+
+    * {
+      margin: 0;
+    }
+  }
+}

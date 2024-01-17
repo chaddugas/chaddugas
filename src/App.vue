@@ -1,16 +1,15 @@
 <template lang="pug">
 #portfolio(@mousemove="logMousePosition" :class="{loaded}")
-  Hero(:loaded)
-  Body
-
-  Background(:loaded :mouse)
+  Hero(v-bind="{loaded}")
+  Main
+  Background(v-bind="{loaded}")
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue';
-import Background from './components/Background_SVG.vue';
+import { provide, ref, reactive, onMounted } from 'vue';
+import Background from './components/Background.vue';
 import Hero from './components/Hero.vue';
-import Body from './components/Body.vue';
+import Main from './components/Main.vue';
 
 const loaded = ref(false);
 const mouse = reactive({ x: 0, y: 0 });
@@ -20,6 +19,8 @@ const logMousePosition = (event: MouseEvent): void => {
   mouse.y = event.clientY;
 };
 
+provide('mouse', mouse);
+
 onMounted(() => {
   setTimeout(() => {
     loaded.value = true;
@@ -28,22 +29,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-:root {
-  --black: #{$black};
-  --white: #{$white};
-
-  --orange: #{$orange};
-  --pink: #{$pink};
-  --berry: #{$berry};
-  
-  --blue: #{$blue};
-  --sky: #{$sky};
-  --purple: #{$purple};
-
-  --stop1: #{$orange};
-  --stop2: #{$pink};
-  --stop3: #{$berry};
-}
+@import './assets/scss/global.scss';
 </style>
 
 <style lang="scss" scoped>
@@ -51,11 +37,8 @@ onMounted(() => {
   position: relative;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  width: 100vw;
   padding: 0;
   margin: 0;
-  grid-area: 1 / 1 / 2 / 2;
 
   &.loaded {
     &::before {

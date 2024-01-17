@@ -1,12 +1,11 @@
 <template lang="pug">
 #hero(:class="{loaded: props.loaded}")
   .inner
-    template(v-for="i in 2")
-      div(:class="{main: i === 1, shadow: i === 2}" :aria-hidden="i === 2")
-        h1.title
-          span(ref="title_0") Chad
-          span(ref="title_1") Dugas
-        h2.sub(ref="sub") Senior Frontend Engineer
+    div.main
+      h1.title
+        span(ref="title_0") Chad
+        span(ref="title_1") Dugas
+      h2.sub(ref="sub") Senior Frontend Engineer
 </template>
 
 <script setup lang="ts">
@@ -29,17 +28,14 @@ onMounted(() => {
   const intro = gsap.timeline({
     paused: true,
     onComplete: () => {
-      smoother?.paused(false);
+      smoother?.kill();
     },
   });
 
   const splitTitles = [
-    new SplitText(title_0.value[0], { type: 'words chars' }),
-    new SplitText(title_0.value[1], { type: 'words chars' }),
-    new SplitText(title_1.value[0], { type: 'words chars' }),
-    new SplitText(title_1.value[1], { type: 'words chars' }),
-    new SplitText(sub.value[0], { type: 'words chars' }),
-    new SplitText(sub.value[1], { type: 'words chars' }),
+    new SplitText(title_0.value, { type: 'words chars' }),
+    new SplitText(title_1.value, { type: 'words chars' }),
+    new SplitText(sub.value, { type: 'words chars' }),
   ];
 
   intro.set(
@@ -47,9 +43,6 @@ onMounted(() => {
       splitTitles[0].chars,
       splitTitles[1].chars,
       splitTitles[2].chars,
-      splitTitles[3].chars,
-      splitTitles[4].chars,
-      splitTitles[5].chars,
     ],
     {
       rotateX: 80,
@@ -60,7 +53,7 @@ onMounted(() => {
   );
 
   intro.to(
-    [splitTitles[0].chars, splitTitles[2].chars],
+    [splitTitles[0].chars, splitTitles[1].chars],
     {
       rotateX: 0,
       translateY: '0px',
@@ -75,22 +68,7 @@ onMounted(() => {
   );
 
   intro.to(
-    [splitTitles[1].chars, splitTitles[3].chars],
-    {
-      rotateX: 0,
-      translateY: '0px',
-      opacity: 1,
-      visibility: 'visible',
-      duration: 0.3,
-      stagger: {
-        each: 0.05,
-      },
-    },
-    '<'
-  );
-
-  intro.to(
-    [splitTitles[4].chars],
+    [splitTitles[2].chars],
     {
       rotateX: 0,
       translateY: '0px',
@@ -102,21 +80,6 @@ onMounted(() => {
       },
     },
     '>'
-  );
-
-  intro.to(
-    [splitTitles[5].chars],
-    {
-      rotateX: 0,
-      translateY: '0px',
-      opacity: 1,
-      visibility: 'visible',
-      duration: 0.3,
-      stagger: {
-        each: 0.05,
-      },
-    },
-    '<'
   );
 
   setTimeout(() => {
@@ -131,28 +94,35 @@ onMounted(() => {
   grid-area: 1 / 1 / 2 / 2;
   font-size: 7.5rem;
   display: flex;
-  align-items: end;
   position: relative;
   height: 100vh;
+  overflow: hidden;
 
   &.loaded {
-    &::before {
+    .inner::before {
       transform: translateY(0);
     }
 
-    .main,
-    .shadow {
+    .main{
       transform: translateY(0);
     }
   }
+}
+
+.inner {
+  display: flex;
+  align-items: end;
+  width: var(--rail);
+  position: relative;
+  padding: 0;
 
   &::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
+    right: 0;
     bottom: 0;
-    width: var(--rail);
     background: linear-gradient(to left, $pink, $berry);
     transform: translateY(100%);
     transition: transform 0.5s ease-out;
@@ -160,16 +130,7 @@ onMounted(() => {
   }
 }
 
-.inner {
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  position: relative;
-  padding: 0;
-}
-
-.main,
-.shadow {
+.main {
   @include fluid(padding, 1.5rem, 3rem);
   display: flex;
   flex-direction: column;
@@ -179,22 +140,9 @@ onMounted(() => {
   transition: transform 0.5s 1s ease-out;
   z-index: 20;
   will-change: transform;
-}
-
-.main {
-  clip-path: polygon(0 0, var(--rail) 0, var(--rail) 100%, 0 100%, 0 0);
-  align-self: start;
   background-color: $black;
   color: $white;
   mix-blend-mode: darken;
-}
-
-.shadow {
-  // display: none;
-  position: absolute;
-  inset: 0;
-  clip-path: polygon(var(--rail) 0, 100% 0, 100% 100%, var(--rail) 100%, var(--rail) 0);
-  color: $white;
 }
 
 .title {
