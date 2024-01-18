@@ -9,8 +9,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { default as gsap, ScrollSmoother, SplitText } from 'gsap/all';
+import { ref, inject, onMounted } from 'vue';
+import { default as gsap, SplitText } from 'gsap/all';
+
+const modals = inject<HTMLElement>('modals');
 
 const title_0 = ref(null);
 const title_1 = ref(null);
@@ -20,15 +22,13 @@ const props = defineProps({
   loaded: Boolean,
 });
 
-const smoother = ScrollSmoother.get();
-
 onMounted(() => {
   if (!title_0.value || !title_1.value || !sub.value) return;
 
   const intro = gsap.timeline({
     paused: true,
     onComplete: () => {
-      smoother?.kill();
+      modals?.classList.remove('initial');
     },
   });
 
@@ -95,15 +95,15 @@ onMounted(() => {
   font-size: 7.5rem;
   display: flex;
   position: relative;
-  height: 100vh;
-  overflow: hidden;
+  height: var(--s_height);
+  // overflow: hidden;
 
   &.loaded {
     .inner::before {
       transform: translateY(0);
     }
 
-    .main{
+    .main {
       transform: translateY(0);
     }
   }
@@ -111,7 +111,7 @@ onMounted(() => {
 
 .inner {
   display: flex;
-  align-items: end;
+  align-items: start;
   width: var(--rail);
   position: relative;
   padding: 0;
@@ -131,18 +131,23 @@ onMounted(() => {
 }
 
 .main {
-  @include fluid(padding, 1.5rem, 3rem);
+  @include fluid(padding-top, 0.5rem, 2rem);
+  @include fluid(padding-inline, 1.5rem, 3rem);
+  @include fluid(padding-bottom, 1.5rem, 3rem);
   display: flex;
   flex-direction: column;
   user-select: none;
   gap: 1rem;
-  transform: translateY(100%);
+  transform: translateY(calc(-100% - 1rem));
   transition: transform 0.5s 1s ease-out;
   z-index: 20;
   will-change: transform;
-  background-color: $black;
+  background: $black;
   color: $white;
   mix-blend-mode: darken;
+  position: sticky;
+  top: 1rem;
+  // margin: 1rem;
 }
 
 .title {

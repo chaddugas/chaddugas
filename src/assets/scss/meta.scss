@@ -1,9 +1,10 @@
+$rootEM: 16px;
 $minWidth: 20rem;
 $maxWidth: 82rem;
 
 $black: #000000;
 $white: #ffffff;
-$lightGray: #e4edf3;
+$lightGray: #eee;
 
 $orange: #fba919;
 $pink: #c6549f;
@@ -11,11 +12,47 @@ $berry: #ee2553;
 $blue: #27249c;
 $sky: #177aee;
 $purple: #4a19d2;
+$magenta: #d219d2;
+// $magenta: #9600ff;
 $green: darken(#bada55, 15%);
 $teal: #66cdaa;
 
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  sm_dn: 575px,
+  md_dn: 767px,
+  lg_dn: 991px,
+  xl_dn: 1199px,
+);
+
 @function strip-unit($value) {
   @return math.div($value, ($value * 0 + 1));
+}
+
+@mixin mq($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+    @media (min-width: $breakpoint-value) {
+      @content;
+    }
+  } @else {
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+@mixin mqdn($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+    @media (max-width: #{$breakpoint-value - 1}) {
+      @content;
+    }
+  } @else {
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
 }
 
 @mixin fluid(

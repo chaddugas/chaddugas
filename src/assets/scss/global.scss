@@ -21,17 +21,30 @@
 :root {
   --black: #{$black};
   --white: #{$white};
+  --lightGray: #{$lightGray};
   --orange: #{$orange};
   --pink: #{$pink};
   --berry: #{$berry};
   --blue: #{$blue};
   --sky: #{$sky};
   --purple: #{$purple};
+  --magenta: #{$magenta};
   --green: #{$green};
   --teal: #{$teal};
   --stop1: #{$orange};
   --stop2: #{$pink};
   --stop3: #{$berry};
+
+  --inset: 0;
+  --s_width: 100vw;
+  --s_height: 100vh;
+
+  @media (pointer: fine) {
+    --inset: 1rem;
+    --s_width: calc(100vw - (2 * var(--inset)));
+    --s_height: calc(100vh - (2 * var(--inset)));
+  }
+
   font-family: Oswald, sans-serif;
   line-height: 1.5;
   font-weight: 700;
@@ -64,14 +77,13 @@ html {
 body {
   grid-area: 1 / 1 / 2 / 2;
   margin: 0;
-  padding: 1rem;
+  padding: var(--inset);
   position: relative;
-
   &::after {
     content: '';
     position: fixed;
     inset: 0;
-    border: 1rem solid $black;
+    border: var(--inset) solid $black;
     z-index: 2000;
     pointer-events: none;
   }
@@ -84,15 +96,17 @@ body {
   z-index: 0;
 }
 
+#curtain {
+  z-index: 3;
+}
+
 #content,
 #modals {
   grid-area: 1 / 1 / 2 / 2;
-}
-
-#content {
+  z-index: 2;
   position: relative;
-  will-change: left;
   &[inert] {
+    z-index: 1;
     pointer-events: none;
   }
 }
@@ -101,18 +115,11 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
-  height: calc(100vh - 2rem);
-  width: calc(100vw - 2rem);
-  position: sticky;
-  top: 1rem;
-  // z-index: 3;
-  // transition: z-index 0s 0.5s;
+  width: var(--s_width);
+  background: $white;
 
-  &[inert] {
-    pointer-events: none;
+  &.initial {
     visibility: hidden;
-    // z-index: -1;
-    // transition: none;
   }
 }
 
@@ -149,6 +156,9 @@ body {
 
   &--right {
     align-self: flex-end;
+    .section__title > * {
+      text-align: right;
+    }
   }
 
   &--left {
@@ -169,6 +179,18 @@ body {
     .section__title {
       mix-blend-mode: darken;
     }
+
+    &.section--content-blowout {
+      .section__content {
+        mix-blend-mode: darken;
+      }
+    }
+  }
+
+  &--content-blowout {
+    .section__content {
+      mix-blend-mode: lighten;
+    }
   }
 
   &__title,
@@ -176,7 +198,6 @@ body {
     @include fluid(padding-inline, 2rem, 4rem);
     z-index: 1000;
     position: relative;
-    // margin-inline: 1rem;
     background-color: $white;
     color: $black;
   }
@@ -184,7 +205,6 @@ body {
   &__title {
     @include fluid(padding-top, 2rem, 4rem);
     @include fluid(padding-bottom, 0.5rem, 1rem);
-    // margin-top: 1rem;
     mix-blend-mode: lighten;
 
     & > * {

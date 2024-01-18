@@ -1,5 +1,6 @@
 <template lang="pug">
 #portfolio(@mousemove="logMousePosition" :class="{loaded}")
+  Curtain
   Hero(v-bind="{loaded}")
   Main
   Background(v-bind="{loaded}")
@@ -7,9 +8,10 @@
 
 <script setup lang="ts">
 import { provide, ref, reactive, onMounted } from 'vue';
-import Background from './components/Background.vue';
+import Curtain from './components/Curtain.vue';
 import Hero from './components/Hero.vue';
 import Main from './components/Main.vue';
+import Background from './components/Background.vue';
 
 const loaded = ref(false);
 const mouse = reactive({ x: 0, y: 0 });

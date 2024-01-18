@@ -1,5 +1,5 @@
 <template lang="pug">
-#background(:class="{offset: store.activeProject}")
+#background(:class="{hidden: store.activeProject}")
   svg(
     x='0px'
     y='0px'
@@ -146,7 +146,7 @@ const popCircle = (circle: Circle, displacementX: number, displacementY: number)
   const displacedDistance = Math.sqrt(
     displacementX * displacementX + displacementY * displacementY
   );
-  const popThreshold = canvas.size * (17 / 150);
+  const popThreshold = canvas.size * (17 / 200);
 
   if (displacedDistance > popThreshold) {
     if (circle.isPopped) return;
@@ -349,11 +349,9 @@ onBeforeUnmount((): void => {
   mix-blend-mode: multiply;
   position: fixed;
   inset: 0;
-  transition: 0.5s ease-in-out;
-  will-change: transform;
 
-  &.offset {
-    transform: translateX(-100vw);
+  &.hidden {
+    visibility: hidden;
   }
 }
 
