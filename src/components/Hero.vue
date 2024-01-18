@@ -96,7 +96,7 @@ onMounted(() => {
   display: flex;
   position: relative;
   height: var(--s_height);
-  // overflow: hidden;
+  overflow: hidden;
 
   &.loaded {
     .inner::before {
@@ -111,7 +111,7 @@ onMounted(() => {
 
 .inner {
   display: flex;
-  align-items: start;
+  align-items: end;
   width: var(--rail);
   position: relative;
   padding: 0;
@@ -131,22 +131,18 @@ onMounted(() => {
 }
 
 .main {
-  @include fluid(padding-top, 0.5rem, 2rem);
-  @include fluid(padding-inline, 1.5rem, 3rem);
-  @include fluid(padding-bottom, 1.5rem, 3rem);
+  @include fluid(padding, 1.5rem, 3rem);
   display: flex;
   flex-direction: column;
   user-select: none;
   gap: 1rem;
-  transform: translateY(calc(-100% - 1rem));
+  transform: translateY(calc(100% + 1rem));
   transition: transform 0.5s 1s ease-out;
   z-index: 20;
   will-change: transform;
   background: $black;
   color: $white;
   mix-blend-mode: darken;
-  position: sticky;
-  top: 1rem;
   // margin: 1rem;
 }
 
