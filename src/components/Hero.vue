@@ -143,7 +143,6 @@ onMounted(() => {
   background: $black;
   color: $white;
   mix-blend-mode: darken;
-  // margin: 1rem;
 }
 
 .title {
