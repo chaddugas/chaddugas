@@ -3,6 +3,27 @@
   @include icon;
 }
 
+.icon-email:before {
+  content: '\e908';
+}
+.icon-phone:before {
+  content: '\e909';
+}
+.icon-resume:before {
+  content: '\e90a';
+}
+.icon-linkedin:before {
+  content: '\e905';
+}
+.icon-codepen:before {
+  content: '\e906';
+}
+.icon-github:before {
+  content: '\e907';
+}
+.icon-door:before {
+  content: '\e904';
+}
 .icon-client-facing:before {
   content: '\e900';
 }
@@ -14,16 +35,4 @@
 }
 .icon-lead:before {
   content: '\e903';
-}
-.icon-door:before {
-  content: '\e904';
-}
-.icon-linkedin:before {
-  content: '\e905';
-}
-.icon-codepen:before {
-  content: '\e906';
-}
-.icon-github:before {
-  content: '\e907';
 }

@@ -53,6 +53,11 @@ export const usePortfolioStore = defineStore('portfolio', () => {
       url: 'https://www.linkedin.com/in/chaddugas',
       icon: 'linkedin',
     },
+    {
+      title: 'Résumé',
+      url: '/files/chad-dugas_resume.pdf',
+      icon: 'resume',
+    },
   ]);
 
   const isActive = ref(false);
