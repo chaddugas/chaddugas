@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vue-tsc && vite build",
+    "preinstall": "node load-env.js",
     "preview": "vite preview"
   },
   "dependencies": {
