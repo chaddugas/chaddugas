@@ -24,41 +24,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, watch, inject, watchEffect, onBeforeUnmount } from 'vue';
+import { ref, reactive, computed, inject, watchEffect, onBeforeUnmount } from 'vue';
 import { usePortfolioStore } from "../store";
 import { useMediaQuery } from '@vueuse/core';
 import gsap from 'gsap';
 
-interface Canvas {
-  height: number;
-  width: number;
-  size: number;
-  centerX: number;
-  centerY: number;
-  arc: number;
-}
-
-interface Circle {
-  id: string;
-  r: any;
-  cx: any;
-  cy: any;
-  isPopped: boolean;
-  rotate: number;
-  x: number;
-  y: number;
-  scale: number;
-  fillOpacity: number;
-  strokeWidth: number;
-  alpha: number;
-  style: string;
-}
-
 const store = usePortfolioStore();
-
-const props = defineProps({
-  loaded: Boolean,
-});
 
 const mouse = inject<Mouse>('mouse');
 
@@ -139,8 +110,6 @@ const makeCircles = (): Array<Circle> => {
     }
   ).reverse();
 };
-
-const circles = ref(makeCircles());
 
 const popCircle = (circle: Circle, displacementX: number, displacementY: number) => {
   const displacedDistance = Math.sqrt(
@@ -240,8 +209,6 @@ const displaceCircles = (): void => {
   });
 };
 
-watchEffect(displaceCircles);
-
 const createPulseAnimation = () => {
   if (pulse) pulse.kill();
 
@@ -327,19 +294,17 @@ const updateDimensions = (): void => {
   bootstrapStaticAnimations();
 };
 
-watch(
-  () => props.loaded,
-  () => {
-    if (props.loaded) {
-      bootstrapStaticAnimations();
-      window.addEventListener('resize', updateDimensions);
-    }
-  }
-);
-
 onBeforeUnmount((): void => {
   window.removeEventListener('resize', updateDimensions);
 });
+
+const circles = ref(makeCircles());
+
+watchEffect(displaceCircles);
+bootstrapStaticAnimations();
+
+window.addEventListener('resize', updateDimensions);
+
 </script>
 
 <style lang="scss" scoped>

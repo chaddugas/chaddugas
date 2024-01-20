@@ -1,23 +1,26 @@
 <template lang="pug">
-#portfolio(@mousemove="logMousePosition" :class="{loaded}")
+#portfolio(
+  @mousemove="logMousePosition"
+  :class="{loaded}")
   Curtain
   Hero(v-bind="{loaded}")
   Main
-  Background(v-bind="{loaded}")
+  Background(v-if="loaded && !rotated")
 </template>
 
 <script setup lang="ts">
-import { provide, ref, reactive, onMounted } from 'vue';
+import { provide, ref, reactive, watch, onMounted } from 'vue';
 import Curtain from './components/Curtain.vue';
 import Hero from './components/Hero.vue';
 import Main from './components/Main.vue';
 import Background from './components/Background.vue';
-// import { useWindowSize } from '@vueuse/core';
+import { useScreenOrientation } from '@vueuse/core';
 
 const loaded = ref(false);
-// const reset = ref(false);
 const mouse = reactive({ x: 0, y: 0 });
-// const { width } = useWindowSize();
+
+const { orientation } = useScreenOrientation();
+const rotated = ref(false);
 
 const logMousePosition = (event: MouseEvent): void => {
   mouse.x = event.clientX;
@@ -26,12 +29,9 @@ const logMousePosition = (event: MouseEvent): void => {
 
 provide('mouse', mouse);
 
-// watch(width, () => {
-//   reset.value = true;
-//   setTimeout(() => {
-//     reset.value = false;
-//   }, 100);
-// });
+watch(orientation, () => {
+  rotated.value = true;
+});
 
 onMounted(() => {
   setTimeout(() => {
