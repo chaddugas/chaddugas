@@ -10,6 +10,7 @@
 
 <script setup lang="ts">
 import { ref, inject, onMounted } from 'vue';
+import { clearAllBodyScrollLocks } from 'body-scroll-lock-upgrade';
 import { default as gsap, SplitText } from 'gsap/all';
 
 const modals = inject<HTMLElement>('modals');
@@ -29,6 +30,7 @@ onMounted(() => {
     paused: true,
     onComplete: () => {
       modals?.classList.remove('initial');
+      clearAllBodyScrollLocks();
     },
   });
 

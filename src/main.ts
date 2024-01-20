@@ -1,15 +1,23 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
+import { disableBodyScroll } from 'body-scroll-lock-upgrade';
 import App from './App.vue';
 
 import {
   default as gsap,
-  ScrollSmoother,
   ScrollTrigger,
   SplitText,
 } from 'gsap/all';
 
-gsap.registerPlugin(ScrollSmoother, ScrollTrigger, SplitText);
+gsap.registerPlugin(ScrollTrigger, SplitText);
+disableBodyScroll(document.querySelector('#fixed') as HTMLElement);
+
+const vh = window.innerHeight * 0.01;
+document.documentElement.style.setProperty('--vh', `${vh}px`);
+window.addEventListener('resize', () => {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+});
 
 const pinia = createPinia();
 const app = createApp(App);

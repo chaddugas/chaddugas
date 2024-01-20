@@ -12,9 +12,12 @@ import Curtain from './components/Curtain.vue';
 import Hero from './components/Hero.vue';
 import Main from './components/Main.vue';
 import Background from './components/Background.vue';
+// import { useWindowSize } from '@vueuse/core';
 
 const loaded = ref(false);
+// const reset = ref(false);
 const mouse = reactive({ x: 0, y: 0 });
+// const { width } = useWindowSize();
 
 const logMousePosition = (event: MouseEvent): void => {
   mouse.x = event.clientX;
@@ -22,6 +25,13 @@ const logMousePosition = (event: MouseEvent): void => {
 };
 
 provide('mouse', mouse);
+
+// watch(width, () => {
+//   reset.value = true;
+//   setTimeout(() => {
+//     reset.value = false;
+//   }, 100);
+// });
 
 onMounted(() => {
   setTimeout(() => {

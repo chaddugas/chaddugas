@@ -37,12 +37,12 @@
 
   --inset: 0;
   --s_width: 100vw;
-  --s_height: 100vh;
+  --s_height: calc((var(--vh, 1vh) * 100));
 
   @media (pointer: fine) {
     --inset: 1rem;
     --s_width: calc(100vw - (2 * var(--inset)));
-    --s_height: calc(100vh - (2 * var(--inset)));
+    --s_height: calc((var(--vh, 1vh) * 100) - (2 * var(--inset)));
   }
 
   font-family: Oswald, sans-serif;
