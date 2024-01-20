@@ -39,11 +39,6 @@ export const usePortfolioStore = defineStore('portfolio', () => {
 
   const socials = reactive([
     {
-      title: 'GitHub',
-      url: 'https://github.com/chaddugas',
-      icon: 'github',
-    },
-    {
       title: 'CodePen',
       url: 'https://codepen.io/chadd',
       icon: 'codepen',
@@ -57,6 +52,11 @@ export const usePortfolioStore = defineStore('portfolio', () => {
       title: 'Résumé',
       url: '/files/chad-dugas_resume.pdf',
       icon: 'resume',
+    },
+    {
+      title: 'GitHub',
+      url: 'https://github.com/chaddugas',
+      icon: 'github',
     },
   ]);
 
