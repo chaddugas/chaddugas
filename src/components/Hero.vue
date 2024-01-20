@@ -76,9 +76,9 @@ onMounted(() => {
       translateY: '0px',
       opacity: 1,
       visibility: 'visible',
-      duration: 0.3,
+      duration: 0.15,
       stagger: {
-        each: 0.05,
+        each: 0.025,
       },
     },
     '>'

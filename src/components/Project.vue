@@ -204,7 +204,7 @@ watchEffect(async () => {
   grid-area: 1 / 1 / 2 / 2;
   gap: 2rem;
   position: sticky;
-  top: 0;
+  top: var(--inset);
   z-index: 2;
   padding: 2rem;
   background: $white;
