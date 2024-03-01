@@ -29,6 +29,14 @@ export const usePortfolioStore = defineStore('portfolio', () => {
     },
     {
       id: '(04)',
+      title: 'Nerd Blocks',
+      url: 'https://nerd-blocks.netlify.app/',
+      img: '/images/nb.webp',
+      roles: ['design', 'lead', 'dev'],
+      color: 'var(--magenta)'
+    },
+    {
+      id: '(05)',
       title: 'Essenz 3D',
       url: 'https://www.livanova.com/cardiopulmonary/en-us/essenz-3d',
       img: '/images/e3d.png',
